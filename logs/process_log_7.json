@@ -1,0 +1,17 @@
+{
+    "Stock": "GOLD - Barrick Gold",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 224,
+            "Total_Pages": 3,
+            "API_Calls_Per_Chunk": 3
+        }
+    ]
+}
+{
+    "Stock": "GOLD - Barrick Gold",
+    "Skipped": true,
+    "API_Calls_Info": []
+}

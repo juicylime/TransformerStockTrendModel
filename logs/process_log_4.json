@@ -1,0 +1,17 @@
+{
+    "Stock": "META OR Facebook - Meta",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 253,
+            "Total_Pages": 3,
+            "API_Calls_Per_Chunk": 3
+        }
+    ]
+}
+{
+    "Stock": "META OR Facebook - Meta",
+    "Skipped": true,
+    "API_Calls_Info": []
+}

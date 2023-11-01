@@ -1,0 +1,326 @@
+{
+    "Stock": "Ford - Ford Motor",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "Ford - Ford Motor",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "Ford - Ford Motor",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 9685,
+            "Total_Pages": 97,
+            "API_Calls_Per_Chunk": 97
+        }
+    ]
+}
+{
+    "Stock": "Ford - Ford Motor",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "Ford - Ford Motor",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "SNAP - Snap",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "SNAP - Snap",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "SNAP - Snap",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "SNAP - Snap",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "SNAP - Snap",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "GM - General Motors",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "GM - General Motors",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 7317,
+            "Total_Pages": 74,
+            "API_Calls_Per_Chunk": 74
+        }
+    ]
+}
+{
+    "Stock": "GM - General Motors",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 5283,
+            "Total_Pages": 53,
+            "API_Calls_Per_Chunk": 53
+        }
+    ]
+}
+{
+    "Stock": "GM - General Motors",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 4,
+            "Total_Hits": 6660,
+            "Total_Pages": 67,
+            "API_Calls_Per_Chunk": 67
+        }
+    ]
+}
+{
+    "Stock": "GM - General Motors",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 5,
+            "Total_Hits": 8142,
+            "Total_Pages": 82,
+            "API_Calls_Per_Chunk": 82
+        }
+    ]
+}
+{
+    "Stock": "GOLD - Barrick Gold",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "GOLD - Barrick Gold",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "GOLD - Barrick Gold",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "GOLD - Barrick Gold",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "GOLD - Barrick Gold",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "WBD - Warner Bros",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "WBD - Warner Bros",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "WBD - Warner Bros",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1674,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "WBD - Warner Bros",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 4,
+            "Total_Hits": 1671,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "WBD - Warner Bros",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 5,
+            "Total_Hits": 1682,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "META OR Facebook - Meta",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "META OR Facebook - Meta",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "META OR Facebook - Meta",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "META OR Facebook - Meta",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "META OR Facebook - Meta",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 9498,
+            "Total_Pages": 95,
+            "API_Calls_Per_Chunk": 95
+        }
+    ]
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 5882,
+            "Total_Pages": 59,
+            "API_Calls_Per_Chunk": 59
+        }
+    ]
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 4419,
+            "Total_Pages": 45,
+            "API_Calls_Per_Chunk": 45
+        }
+    ]
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 4,
+            "Total_Hits": 5961,
+            "Total_Pages": 60,
+            "API_Calls_Per_Chunk": 60
+        }
+    ]
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 5,
+            "Total_Hits": 5931,
+            "Total_Pages": 60,
+            "API_Calls_Per_Chunk": 60
+        }
+    ]
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 9498,
+            "Total_Pages": 95,
+            "API_Calls_Per_Chunk": 95
+        }
+    ]
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 5882,
+            "Total_Pages": 59,
+            "API_Calls_Per_Chunk": 59
+        }
+    ]
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 4419,
+            "Total_Pages": 45,
+            "API_Calls_Per_Chunk": 45
+        }
+    ]
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 4,
+            "Total_Hits": 5961,
+            "Total_Pages": 60,
+            "API_Calls_Per_Chunk": 60
+        }
+    ]
+}
+{
+    "Stock": "UBER - Uber",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 5,
+            "Total_Hits": 5931,
+            "Total_Pages": 60,
+            "API_Calls_Per_Chunk": 60
+        }
+    ]
+}

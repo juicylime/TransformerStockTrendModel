@@ -1,0 +1,399 @@
+{
+    "Stock": "PLTR - Palantir",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2121,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}
+{
+    "Stock": "PLTR - Palantir",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1693,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "PLTR - Palantir",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1701,
+            "Total_Pages": 18,
+            "API_Calls_Per_Chunk": 18
+        }
+    ]
+}
+{
+    "Stock": "AAPL - Apple",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 6419,
+            "Total_Pages": 65,
+            "API_Calls_Per_Chunk": 65
+        }
+    ]
+}
+{
+    "Stock": "AAPL - Apple",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1999,
+            "Total_Pages": 20,
+            "API_Calls_Per_Chunk": 20
+        }
+    ]
+}
+{
+    "Stock": "AAPL - Apple",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 2213,
+            "Total_Pages": 23,
+            "API_Calls_Per_Chunk": 23
+        }
+    ]
+}
+{
+    "Stock": "AMD - Advanced Micro Devices",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 6056,
+            "Total_Pages": 61,
+            "API_Calls_Per_Chunk": 61
+        }
+    ]
+}
+{
+    "Stock": "AMD - Advanced Micro Devices",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 2638,
+            "Total_Pages": 27,
+            "API_Calls_Per_Chunk": 27
+        }
+    ]
+}
+{
+    "Stock": "AMD - Advanced Micro Devices",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 3078,
+            "Total_Pages": 31,
+            "API_Calls_Per_Chunk": 31
+        }
+    ]
+}
+{
+    "Stock": "NVDA - NVIDIA",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 4763,
+            "Total_Pages": 48,
+            "API_Calls_Per_Chunk": 48
+        }
+    ]
+}
+{
+    "Stock": "NVDA - NVIDIA",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 2190,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}
+{
+    "Stock": "NVDA - NVIDIA",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 4763,
+            "Total_Pages": 48,
+            "API_Calls_Per_Chunk": 48
+        }
+    ]
+}
+{
+    "Stock": "NVDA - NVIDIA",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 2190,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}
+{
+    "Stock": "NVDA - NVIDIA",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1741,
+            "Total_Pages": 18,
+            "API_Calls_Per_Chunk": 18
+        }
+    ]
+}
+{
+    "Stock": "BAC - Bank of America",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2821,
+            "Total_Pages": 29,
+            "API_Calls_Per_Chunk": 29
+        }
+    ]
+}
+{
+    "Stock": "BAC - Bank of America",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 2031,
+            "Total_Pages": 21,
+            "API_Calls_Per_Chunk": 21
+        }
+    ]
+}
+{
+    "Stock": "BAC - Bank of America",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1952,
+            "Total_Pages": 20,
+            "API_Calls_Per_Chunk": 20
+        }
+    ]
+}
+{
+    "Stock": "INTC - Intel",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2087,
+            "Total_Pages": 21,
+            "API_Calls_Per_Chunk": 21
+        }
+    ]
+}
+{
+    "Stock": "INTC - Intel",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1630,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "INTC - Intel",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1630,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "LU - Lufax Holding",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2515,
+            "Total_Pages": 26,
+            "API_Calls_Per_Chunk": 26
+        }
+    ]
+}
+{
+    "Stock": "LU - Lufax Holding",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 2067,
+            "Total_Pages": 21,
+            "API_Calls_Per_Chunk": 21
+        }
+    ]
+}
+{
+    "Stock": "LU - Lufax Holding",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 2694,
+            "Total_Pages": 27,
+            "API_Calls_Per_Chunk": 27
+        }
+    ]
+}
+{
+    "Stock": "VALE - Vale S.A.",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2588,
+            "Total_Pages": 26,
+            "API_Calls_Per_Chunk": 26
+        }
+    ]
+}
+{
+    "Stock": "VALE - Vale S.A.",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1573,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "VALE - Vale S.A.",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1832,
+            "Total_Pages": 19,
+            "API_Calls_Per_Chunk": 19
+        }
+    ]
+}
+{
+    "Stock": "PFE - Pfizer",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 3800,
+            "Total_Pages": 38,
+            "API_Calls_Per_Chunk": 38
+        }
+    ]
+}
+{
+    "Stock": "PFE - Pfizer",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1765,
+            "Total_Pages": 18,
+            "API_Calls_Per_Chunk": 18
+        }
+    ]
+}
+{
+    "Stock": "PFE - Pfizer",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 2176,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}
+{
+    "Stock": "ITUB - Ita\u00fa Unibanco Holding S.A.",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "ITUB - Ita\u00fa Unibanco Holding S.A.",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "ITUB - Ita\u00fa Unibanco Holding S.A.",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "AGNC - AGNC Investment",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 1600,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "AGNC - AGNC Investment",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1576,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "AGNC - AGNC Investment",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 2102,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "Stock": "AAL - American Airlines Group",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 1569,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "AAL - American Airlines Group",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1729,
+            "Total_Pages": 18,
+            "API_Calls_Per_Chunk": 18
+        }
+    ]
+}
+{
+    "Stock": "AAL - American Airlines Group",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1755,
+            "Total_Pages": 18,
+            "API_Calls_Per_Chunk": 18
+        }
+    ]
+}
+{
+    "Stock": "TSLA - Tesla",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 9983,
+            "Total_Pages": 100,
+            "API_Calls_Per_Chunk": 100
+        }
+    ]
+}
+{
+    "Stock": "TSLA - Tesla",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 2032,
+            "Total_Pages": 21,
+            "API_Calls_Per_Chunk": 21
+        }
+    ]
+}
+{
+    "Stock": "TSLA - Tesla",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 2167,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}
+{
+    "Stock": "PLTR - Palantir",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2121,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}

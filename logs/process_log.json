@@ -1,0 +1,495 @@
+{
+    "Stock": "TSLA - Tesla",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 9639,
+            "Total_Pages": 97,
+            "API_Calls_Per_Chunk": 97
+        }
+    ]
+}
+{
+    "Stock": "TSLA - Tesla",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 2033,
+            "Total_Pages": 21,
+            "API_Calls_Per_Chunk": 21
+        }
+    ]
+}
+{
+    "Stock": "PLTR - Palantir",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2122,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}
+{
+    "Stock": "AMD - Advanced Micro Devices",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 6057,
+            "Total_Pages": 61,
+            "API_Calls_Per_Chunk": 61
+        }
+    ]
+}
+{
+    "Stock": "AAL - American Airlines Group",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 1575,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "AAL - American Airlines Group",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1732,
+            "Total_Pages": 18,
+            "API_Calls_Per_Chunk": 18
+        }
+    ]
+}
+{
+    "Stock": "BAC - Bank of America",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2826,
+            "Total_Pages": 29,
+            "API_Calls_Per_Chunk": 29
+        }
+    ]
+}
+{
+    "Stock": "LU - Lufax Holding",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2517,
+            "Total_Pages": 26,
+            "API_Calls_Per_Chunk": 26
+        }
+    ]
+}
+{
+    "Stock": "VZ - Verizon",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 1930,
+            "Total_Pages": 20,
+            "API_Calls_Per_Chunk": 20
+        }
+    ]
+}
+{
+    "Stock": "VZ - Verizon",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 2395,
+            "Total_Pages": 24,
+            "API_Calls_Per_Chunk": 24
+        }
+    ]
+}
+{
+    "Stock": "VZ - Verizon",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 2164,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}
+{
+    "Stock": "SRC - Spirit Realty Capital",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 1656,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "SRC - Spirit Realty Capital",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 2242,
+            "Total_Pages": 23,
+            "API_Calls_Per_Chunk": 23
+        }
+    ]
+}
+{
+    "Stock": "SRC - Spirit Realty Capital",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 3793,
+            "Total_Pages": 38,
+            "API_Calls_Per_Chunk": 38
+        }
+    ]
+}
+{
+    "Stock": "CCL - Carnival Corporation &",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2438,
+            "Total_Pages": 25,
+            "API_Calls_Per_Chunk": 25
+        }
+    ]
+}
+{
+    "Stock": "CCL - Carnival Corporation &",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1946,
+            "Total_Pages": 20,
+            "API_Calls_Per_Chunk": 20
+        }
+    ]
+}
+{
+    "Stock": "CCL - Carnival Corporation &",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1687,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "BMY - Bristol-Myers Squibb",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 1630,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "BMY - Bristol-Myers Squibb",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1538,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "BMY - Bristol-Myers Squibb",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1617,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "PFE - Pfizer",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 3819,
+            "Total_Pages": 39,
+            "API_Calls_Per_Chunk": 39
+        }
+    ]
+}
+{
+    "Stock": "BBD - Banco Bradesco S.A.",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "BBD - Banco Bradesco S.A.",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "BBD - Banco Bradesco S.A.",
+    "Skipped": true,
+    "API_Calls_Info": []
+}
+{
+    "Stock": "BCS - Barclays",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 8731,
+            "Total_Pages": 88,
+            "API_Calls_Per_Chunk": 88
+        }
+    ]
+}
+{
+    "Stock": "BCS - Barclays",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 8335,
+            "Total_Pages": 84,
+            "API_Calls_Per_Chunk": 84
+        }
+    ]
+}
+{
+    "Stock": "BCS - Barclays",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 8706,
+            "Total_Pages": 88,
+            "API_Calls_Per_Chunk": 88
+        }
+    ]
+}
+{
+    "Stock": "LCID - Lucid",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 1574,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "LCID - Lucid",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1889,
+            "Total_Pages": 19,
+            "API_Calls_Per_Chunk": 19
+        }
+    ]
+}
+{
+    "Stock": "LCID - Lucid",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1549,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "XOM - Exxon Mobil",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2129,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}
+{
+    "Stock": "XOM - Exxon Mobil",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 3123,
+            "Total_Pages": 32,
+            "API_Calls_Per_Chunk": 32
+        }
+    ]
+}
+{
+    "Stock": "XOM - Exxon Mobil",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 2620,
+            "Total_Pages": 27,
+            "API_Calls_Per_Chunk": 27
+        }
+    ]
+}
+{
+    "Stock": "WDC - Western Digital",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 1719,
+            "Total_Pages": 18,
+            "API_Calls_Per_Chunk": 18
+        }
+    ]
+}
+{
+    "Stock": "WDC - Western Digital",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1578,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "WDC - Western Digital",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1805,
+            "Total_Pages": 19,
+            "API_Calls_Per_Chunk": 19
+        }
+    ]
+}
+{
+    "Stock": "AGNC - AGNC Investment",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 1602,
+            "Total_Pages": 17,
+            "API_Calls_Per_Chunk": 17
+        }
+    ]
+}
+{
+    "Stock": "NOK - Nokia Oyj",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 3002,
+            "Total_Pages": 31,
+            "API_Calls_Per_Chunk": 31
+        }
+    ]
+}
+{
+    "Stock": "NOK - Nokia Oyj",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1588,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
+{
+    "Stock": "NOK - Nokia Oyj",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 2574,
+            "Total_Pages": 26,
+            "API_Calls_Per_Chunk": 26
+        }
+    ]
+}
+{
+    "Stock": "PBR - Petrobras",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 1,
+            "Total_Hits": 2107,
+            "Total_Pages": 22,
+            "API_Calls_Per_Chunk": 22
+        }
+    ]
+}
+{
+    "Stock": "PBR - Petrobras",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 2,
+            "Total_Hits": 1768,
+            "Total_Pages": 18,
+            "API_Calls_Per_Chunk": 18
+        }
+    ]
+}
+{
+    "Stock": "PBR - Petrobras",
+    "Skipped": false,
+    "API_Calls_Info": [
+        {
+            "Chunk": 3,
+            "Total_Hits": 1567,
+            "Total_Pages": 16,
+            "API_Calls_Per_Chunk": 16
+        }
+    ]
+}
