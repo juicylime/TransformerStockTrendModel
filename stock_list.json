@@ -1,137 +1,152 @@
 {
+    "LU": {
+        "Symbol": "LU",
+        "Name": "Lufax Holding Ltd",
+        "EntityNames": ["LU", "Lufax", "Lufax Holding Ltd"]
+    },
     "TSLA": {
         "Symbol": "TSLA",
         "Name": "Tesla, Inc.",
-        "EntityNames": ["TSLA", "Tesla"]
+        "EntityNames": ["TSLA", "Tesla", "Tesla, Inc."]
     },
     "PLTR": {
         "Symbol": "PLTR",
         "Name": "Palantir Inc.",
-        "EntityNames": ["PLTR", "Palantir"]
+        "EntityNames": ["PLTR", "Palantir", "Palantir Inc."]
     },
     "AAPL": {
         "Symbol": "AAPL",
         "Name": "Apple Inc.",
-        "EntityNames": ["AAPL", "Apple"]
+        "EntityNames": ["AAPL", "Apple", "Apple Inc."]
     },
     "AMD": {
         "Symbol": "AMD",
         "Name": "Advanced Micro Devices, Inc.",
-        "EntityNames": ["AMD", "Advanced Micro Devices"]
+        "EntityNames": ["AMD", "Advanced Micro Devices", "Advanced Micro Devices, Inc."]
     },
     "NVDA": {
         "Symbol": "NVDA",
         "Name": "NVIDIA Corporation",
-        "EntityNames": ["NVDA", "NVIDIA"]
+        "EntityNames": ["NVDA", "NVIDIA", "NVIDIA Corporation"]
     },
     "AAL": {
         "Symbol": "AAL",
         "Name": "American Airlines Group Inc.",
-        "EntityNames": ["AAL", "American Airlines"]
+        "EntityNames": ["AAL", "American Airlines", "American Airlines Group Inc."]
     },
     "BAC": {
         "Symbol": "BAC",
         "Name": "Bank of America Corporation",
-        "EntityNames": ["BAC", "Bank of America"]
+        "EntityNames": ["BAC", "Bank of America", "Bank of America Corporation"]
     },
     "INTC": {
         "Symbol": "INTC",
         "Name": "Intel Corporation",
-        "EntityNames": ["INTC", "Intel"]
-    },
-    "LU": {
-        "Symbol": "LU",
-        "Name": "Lufax Holding Ltd",
-        "EntityNames": ["LU", "Lufax"]
+        "EntityNames": ["INTC", "Intel", "Intel Corporation"]
     },
     "META": {
         "Symbol": "META",
         "Name": "Meta, Inc.",
-        "EntityNames": ["META", "Meta", "Facebook"]
+        "EntityNames": ["META", "Meta", "Facebook", "Meta, Inc."]
     },
     "VALE": {
         "Symbol": "VALE",
         "Name": "Vale S.A.",
-        "EntityNames": ["VALE", "Vale S.A.", "Vale"]
+        "EntityNames": ["VALE", "Vale S.A.", "Vale", "Vale sa"]
     },
     "VZ": {
         "Symbol": "VZ",
         "Name": "Verizon Inc.",
-        "EntityNames": ["VZ", "Verizon"]
+        "EntityNames": ["VZ", "Verizon", "Verizon Inc."]
     },
     "SRC": {
         "Symbol": "SRC",
         "Name": "Spirit Realty Capital, Inc.",
-        "EntityNames": ["SRC", "Spirit Realty Capital"]
+        "EntityNames": ["SRC", "Spirit Realty Capital", "Spirit Realty Capital, Inc."]
     },
     "CCL": {
         "Symbol": "CCL",
         "Name": "Carnival Corporation & plc",
-        "EntityNames": ["CCL", "Carnival"]
+        "EntityNames": ["CCL", "Carnival", "Carnival Corporation & plc"]
     },
     "BMY": {
         "Symbol": "BMY",
         "Name": "Bristol-Myers Squibb Company",
-        "EntityNames": ["BMY", "Bristol-Myers Squibb"]
+        "EntityNames": ["BMY", "Bristol-Myers Squibb", "Bristol-Myers Squibb Company"]
     },
     "PFE": {
         "Symbol": "PFE",
         "Name": "Pfizer Inc.",
-        "EntityNames": ["PFE", "Pfizer"]
+        "EntityNames": ["PFE", "Pfizer", "Pfizer Inc."]
     },
     "AVTR": {
         "Symbol": "AVTR",
         "Name": "Avantor, Inc.",
-        "EntityNames": ["AVTR", "Avantor"]
+        "EntityNames": ["AVTR", "Avantor", "Avantor, Inc."]
     },
     "ITUB": {
         "Symbol": "ITUB",
         "Name": "Ita\u00fa Unibanco Holding S.A.",
-        "EntityNames": ["ITUB", "Itau Unibanco"]
+        "EntityNames": ["ITUB", "Itau Unibanco", "Itua Unibanco Holding S.A."]
     },
     "BBD": {
         "Symbol": "BBD",
         "Name": "Banco Bradesco S.A.",
-        "EntityNames": ["BBD", "Banco Bradesco"]
+        "EntityNames": ["BBD", "Banco Bradesco", "Banco Bradesco S.A."]
     },
     "UBER": {
         "Symbol": "UBER",
         "Name": "Uber, Inc.",
-        "EntityNames": ["UBER", "Uber"]
+        "EntityNames": ["UBER", "Uber", "Uber, Inc."]
     },
     "BCS": {
         "Symbol": "BCS",
         "Name": "Barclays PLC",
-        "EntityNames": ["BCS", "Barclays"]
+        "EntityNames": ["BCS", "Barclays", "Barclays PLC"]
     },
     "LCID": {
         "Symbol": "LCID",
         "Name": "Lucid, Inc.",
-        "EntityNames": ["LCID", "Lucid"]
+        "EntityNames": ["LCID", "Lucid", "Lucid, Inc."]
     },
     "XOM": {
         "Symbol": "XOM",
         "Name": "Exxon Mobil Corporation",
-        "EntityNames": ["XOM", "Exxon Mobil"]
+        "EntityNames": ["XOM", "Exxon Mobil", "Exxon Mobil Corporation"]
     },
     "WDC": {
         "Symbol": "WDC",
         "Name": "Western Digital Corporation",
-        "EntityNames": ["WDC", "Western Digital"]
+        "EntityNames": ["WDC", "Western Digital", "Western Digital Corporation"]
     },
     "AGNC": {
         "Symbol": "AGNC",
         "Name": "AGNC Investment Corp.",
-        "EntityNames": ["AGNC", "AGNC Investment"]
+        "EntityNames": ["AGNC", "AGNC Investment", "AGNC Investment Corp."]
     },
     "NOK": {
         "Symbol": "NOK",
         "Name": "Nokia Oyj",
-        "EntityNames": ["NOK", "Nokia"]
+        "EntityNames": ["NOK", "Nokia", "Nokia Oyj"]
     },
     "PBR": {
         "Symbol": "PBR",
         "Name": "Petrobras",
-        "EntityNames": ["PBR", "Petrobras"]
+        "EntityNames": ["PBR", "Petrobras", "Petrobras"]
+    },
+    "GOOG": {
+        "Symbol": "GOOG",
+        "Name": "Alphabet Inc.",
+        "EntityNames": ["GOOG", "GOOGL", "Alphabet Inc", "Alphabet"]
+    },
+    "MSFT": {
+        "Symbol": "MSFT",
+        "Name": "Microsoft Corp",
+        "EntityNames": ["MSFT", "Microsoft", "Microsoft Corp"]
+    },
+    "AMZN": {
+        "Symbol": "AMZN",
+        "Name": "Amazon.com Inc.",
+        "EntityNames": ["AMZN", "Amazon", "Amazon.com Inc.", "Amazon.com"]
     }
 }

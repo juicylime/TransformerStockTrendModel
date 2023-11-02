@@ -14,6 +14,9 @@ def format_data(ticker_symbol, entity_names, data):
         if item.get('summary', '') is None:
             continue
 
+        if item.get('topic', '') == 'gaming' or item.get('topic', '') == 'sport':
+            continue
+
         # Extract the date from the 'published_at' field
         # Assuming 'published_at' is formatted as 'YYYY-MM-DD HH:MM:SS'
         date = item.get('published_date', '').split(' ')[0]

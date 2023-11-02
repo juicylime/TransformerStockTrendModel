@@ -3,19 +3,21 @@ import time
 import json
 import re
 from collections import defaultdict
-from flair.data import Sentence
-from flair.models import SequenceTagger
-from flair import device
-from nltk.tokenize import sent_tokenize
-
+from nltk.tokenize import sent_tokenize, word_tokenize
+from transformers import pipeline, TFRobertaForTokenClassification, RobertaTokenizerFast
+import tensorflow as tf
 
 # Ensure NLTK data is downloaded (used for sentence tokenization)
 import nltk
 nltk.download('punkt')
 
 def process_articles(stock_symbol, formatted_articles, entity_names):
-    # Load the NER tagger model
-    tagger = SequenceTagger.load('flair/ner-english-fast')
+    # Load the NER tagger model and tokenizer
+    tokenizer = RobertaTokenizerFast.from_pretrained('Jean-Baptiste/roberta-large-ner-english')
+    model = TFRobertaForTokenClassification.from_pretrained('Jean-Baptiste/roberta-large-ner-english')
+
+     # Create the NER pipeline
+    ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True)
 
     # Prepare a directory for the filtered articles
     filtered_dir = 'G:/StockData/filtered_news_articles'
@@ -30,7 +32,11 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
             # Remove the [ENT]...[/ENT] tokens and the values in between
             body_text = re.sub(r'\[ENT\].*?\[\/ENT\]', '', article['body'])
 
-            # Tokenize the body text into individual sentences
+            # Tokenize the body text using the word_tokenize function
+            tokens = word_tokenize(body_text)
+
+            # Join tokens back into a single string and split into sentences
+            body_text = ' '.join(tokens)
             sentences = sent_tokenize(body_text)
 
             # Filter sentences to only include those that contain any of the specified entity names
@@ -39,19 +45,17 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
             # Skip this article if no relevant sentences are found
             if not relevant_sentences:
                 continue
-
-            # Create Sentence objects from the relevant sentences
-            sentence_objects = [Sentence(sent) for sent in relevant_sentences]
-
-            # Run NER on the relevant sentences
-            tagger.predict(sentence_objects)
-
+            
             # Check the recognized entities for each sentence
             found_matching_entity = False  # Initialize a flag to false
-            for sentence in sentence_objects:
-                for entity in sentence.get_spans('ner'):
-                    # Check if the entity is an organization and matches any of the specified entity names
-                    if entity.tag == 'ORG' and entity.text in entity_names:
+            for sentence in relevant_sentences:
+                # Run NER on the sentence
+                entities = ner_pipeline(sentence)
+                # Check if any of the entities match the specified entity names and are organizations
+                for entity in entities:
+                    # Remove leading and trailing whitespace from the entity text
+                    entity_text = entity['word'].strip()
+                    if entity['entity_group' ] == 'ORG' and entity_text in entity_names:
                         filtered_articles_data[date]['articles'].append(article)
                         filtered_articles_data[date]['number_of_articles'] += 1
                         found_matching_entity = True  # Set the flag to true
@@ -76,9 +80,6 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
     print(f'Filtered articles for {stock_symbol} saved to {output_path}')
 
 def main():
-    # Sanity Check the device
-    print(f'Flair is using: {device}')
-
     # Load the stock information
     with open('stock_list.json', 'r') as file:
         stocks = json.load(file)
