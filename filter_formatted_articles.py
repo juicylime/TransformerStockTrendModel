@@ -2,6 +2,7 @@ import os
 import time
 import json
 import re
+import logging
 from collections import defaultdict
 from nltk.tokenize import sent_tokenize, word_tokenize
 from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
@@ -11,11 +12,21 @@ import tensorflow as tf
 import nltk
 nltk.download('punkt')
 
+def setup_logging():
+    logging.basicConfig(filename='article_processing.log', level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
+
 def process_articles(stock_symbol, formatted_articles, entity_names):
+    # Set up logging
+    setup_logging()
+
+    logging.info(f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
+    print(f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
+
     # Detect hardware, return appropriate distribution strategy
     try:
         tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
-        print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
+        # print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
     except ValueError:
         tpu = None
 
@@ -92,6 +103,10 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
     output_path = os.path.join(filtered_dir, f'filtered_{stock_symbol}_articles.json')
     with open(output_path, 'w', encoding='utf-8') as output_file:
         json.dump(output_data, output_file, ensure_ascii=False, indent=4)
+
+    # Log the number of articles remaining after filtering
+    remaining_articles = sum(info['number_of_articles'] for date, info in filtered_articles_data.items())
+    logging.info(f'Number of articles remaining after filtering for {stock_symbol}: {remaining_articles}')
 
     print(f'Filtered articles for {stock_symbol} saved to {output_path}')
 
