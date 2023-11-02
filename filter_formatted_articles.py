@@ -7,6 +7,7 @@ from collections import defaultdict
 from nltk.tokenize import sent_tokenize, word_tokenize
 from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
 import tensorflow as tf
+import multiprocessing
 
 # Ensure NLTK data is downloaded (used for sentence tokenization)
 import nltk
@@ -115,7 +116,10 @@ def main():
     with open('stock_list.json', 'r') as file:
         stocks = json.load(file)
 
-    # Process each stock
+    # Create a list to hold the created process objects
+    processes = []
+
+    # Create a process for each stock
     for stock_symbol, stock_info in stocks.items():
         # Define the path to the formatted articles JSON file
         formatted_articles_path = f'G:/StockData/formatted_news_articles/formatted_{stock_symbol}_articles.json'
@@ -124,8 +128,19 @@ def main():
         with open(formatted_articles_path, 'r') as file:
             formatted_articles = json.load(file)['data']  # Assuming the articles are under the 'data' key
 
-        # Process the articles
-        process_articles(stock_symbol, formatted_articles, stock_info['EntityNames'])
+        # Create a process
+        process = multiprocessing.Process(target=process_articles, args=(stock_symbol, formatted_articles, stock_info['EntityNames']))
+        
+        # Append the process to the processes list
+        processes.append(process)
+
+    # Start all the processes
+    for process in processes:
+        process.start()
+
+    # Wait for all processes to finish
+    for process in processes:
+        process.join()
 
 if __name__ == "__main__":
     main()
