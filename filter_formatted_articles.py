@@ -7,7 +7,6 @@ from collections import defaultdict
 from nltk.tokenize import sent_tokenize, word_tokenize
 from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
 import tensorflow as tf
-import multiprocessing
 
 # Ensure NLTK data is downloaded (used for sentence tokenization)
 import nltk
@@ -48,7 +47,7 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
     ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True)
 
     # Prepare a directory for the filtered articles
-    filtered_dir = 'G:/StockData/filtered_news_articles'
+    filtered_dir = '../StockData/StockData/filtered_news_articles'
     os.makedirs(filtered_dir, exist_ok=True)
 
     filtered_articles_data = defaultdict(lambda: {'number_of_articles': 0, 'articles': []})
@@ -116,31 +115,17 @@ def main():
     with open('stock_list.json', 'r') as file:
         stocks = json.load(file)
 
-    # Create a list to hold the created process objects
-    processes = []
-
-    # Create a process for each stock
+    # Process each stock
     for stock_symbol, stock_info in stocks.items():
         # Define the path to the formatted articles JSON file
-        formatted_articles_path = f'G:/StockData/formatted_news_articles/formatted_{stock_symbol}_articles.json'
+        formatted_articles_path = f'../StockData/StockData/formatted_news_articles/formatted_{stock_symbol}_articles.json'
 
         # Load the formatted articles
         with open(formatted_articles_path, 'r') as file:
             formatted_articles = json.load(file)['data']  # Assuming the articles are under the 'data' key
 
-        # Create a process
-        process = multiprocessing.Process(target=process_articles, args=(stock_symbol, formatted_articles, stock_info['EntityNames']))
-        
-        # Append the process to the processes list
-        processes.append(process)
-
-    # Start all the processes
-    for process in processes:
-        process.start()
-
-    # Wait for all processes to finish
-    for process in processes:
-        process.join()
+        # Process the articles
+        process_articles(stock_symbol, formatted_articles, stock_info['EntityNames'])
 
 if __name__ == "__main__":
     main()
