@@ -4,7 +4,7 @@ import json
 import re
 from collections import defaultdict
 from nltk.tokenize import sent_tokenize, word_tokenize
-from transformers import pipeline, TFRobertaForTokenClassification, RobertaTokenizerFast
+from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
 import tensorflow as tf
 
 # Ensure NLTK data is downloaded (used for sentence tokenization)
@@ -12,9 +12,25 @@ import nltk
 nltk.download('punkt')
 
 def process_articles(stock_symbol, formatted_articles, entity_names):
-    # Load the NER tagger model and tokenizer
-    tokenizer = RobertaTokenizerFast.from_pretrained('Jean-Baptiste/roberta-large-ner-english')
-    model = TFRobertaForTokenClassification.from_pretrained('Jean-Baptiste/roberta-large-ner-english')
+    # Detect hardware, return appropriate distribution strategy
+    try:
+        tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
+        print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
+    except ValueError:
+        tpu = None
+
+    if tpu:
+        tf.config.experimental_connect_to_cluster(tpu)
+        tf.tpu.experimental.initialize_tpu_system(tpu)
+        strategy = tf.distribute.TPUStrategy(tpu)
+    else:
+        strategy = tf.distribute.get_strategy()
+
+    print("REPLICAS: ", strategy.num_replicas_in_sync)
+
+    with strategy.scope():
+        model = TFAutoModelForTokenClassification.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
+        tokenizer = AutoTokenizer.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
 
      # Create the NER pipeline
     ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True)
