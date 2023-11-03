@@ -8,7 +8,6 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
 import tensorflow as tf
 from tensorflow.python.profiler import profiler_client
-import subprocess
 
 # Ensure NLTK data is downloaded (used for sentence tokenization)
 import nltk
@@ -39,8 +38,6 @@ with strategy.scope():
     # Create the NER pipeline
     ner_pipeline = pipeline(
         "ner", model=model, tokenizer=tokenizer, grouped_entities=True, device=0)
-    
-    tensorboard_process = subprocess.Popen(['tensorboard', '--logdir', '../tensorboard/logs', '--bind_all'])
 
 
 def setup_logging():
