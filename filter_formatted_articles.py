@@ -31,8 +31,6 @@ else:
 print("REPLICAS: ", strategy.num_replicas_in_sync)
 
 with strategy.scope():
-    tensorboard_process = subprocess.Popen(['tensorboard', '--logdir', '../tensorboard/logs', '--bind_all'])
-
     model = TFAutoModelForTokenClassification.from_pretrained(
         "Jean-Baptiste/roberta-large-ner-english")
     tokenizer = AutoTokenizer.from_pretrained(
@@ -41,6 +39,8 @@ with strategy.scope():
     # Create the NER pipeline
     ner_pipeline = pipeline(
         "ner", model=model, tokenizer=tokenizer, grouped_entities=True, device=0)
+    
+    tensorboard_process = subprocess.Popen(['tensorboard', '--logdir', '../tensorboard/logs', '--bind_all'])
 
 
 def setup_logging():
