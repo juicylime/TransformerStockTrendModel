@@ -30,11 +30,6 @@ else:
 print("REPLICAS: ", strategy.num_replicas_in_sync)
 
 with strategy.scope():
-    tf.debugging.experimental.enable_dump_debug_info(
-        logdir='logs',
-        tensor_debug_mode="FULL_HEALTH",
-        circular_buffer_size=-1
-    )
     model = TFAutoModelForTokenClassification.from_pretrained(
         "Jean-Baptiste/roberta-large-ner-english")
     tokenizer = AutoTokenizer.from_pretrained(
@@ -130,6 +125,7 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
 
 
 def main():
+    tf.profiler.experimental.start('logs')
     # Load the stock information
     with open('stock_list.json', 'r') as file:
         stocks = json.load(file)
@@ -148,6 +144,7 @@ def main():
         process_articles(stock_symbol, formatted_articles,
                          stock_info['EntityNames'])
 
-
+        tf.profiler.experimental.stop()
+        
 if __name__ == "__main__":
     main()
