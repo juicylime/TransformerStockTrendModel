@@ -29,27 +29,35 @@ else:
 print("REPLICAS: ", strategy.num_replicas_in_sync)
 
 with strategy.scope():
-    model = TFAutoModelForTokenClassification.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
-    tokenizer = AutoTokenizer.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
+    model = TFAutoModelForTokenClassification.from_pretrained(
+        "Jean-Baptiste/roberta-large-ner-english")
+    tokenizer = AutoTokenizer.from_pretrained(
+        "Jean-Baptiste/roberta-large-ner-english")
 
     # Create the NER pipeline
-    ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True, device=0)
+    ner_pipeline = pipeline(
+        "ner", model=model, tokenizer=tokenizer, grouped_entities=True, device=0)
+
 
 def setup_logging():
     logging.basicConfig(filename='article_processing.log', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
 
+
 def process_articles(stock_symbol, formatted_articles, entity_names):
     # Set up logging
     setup_logging()
 
-    logging.info(f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
-    print(f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
+    logging.info(
+        f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
+    print(
+        f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
 
-    filtered_articles_data = defaultdict(lambda: {'number_of_articles': 0, 'articles': []})
+    filtered_articles_data = defaultdict(
+        lambda: {'number_of_articles': 0, 'articles': []})
 
     for date, info in formatted_articles.items():
-        start_time = time.time() # Store the start time
+        start_time = time.time()  # Store the start time
 
         for article in info['articles']:
             # Remove the [ENT]...[/ENT] tokens and the values in between
@@ -63,12 +71,13 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
             sentences = sent_tokenize(body_text)
 
             # Filter sentences to only include those that contain any of the specified entity names
-            relevant_sentences = [sent for sent in sentences if any(name in sent for name in entity_names)]
+            relevant_sentences = [sent for sent in sentences if any(
+                name in sent for name in entity_names)]
 
             # Skip this article if no relevant sentences are found
             if not relevant_sentences:
                 continue
-            
+
             # Check the recognized entities for each sentence
             found_matching_entity = False  # Initialize a flag to false
             for sentence in relevant_sentences:
@@ -78,8 +87,9 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
                 for entity in entities:
                     # Remove leading and trailing whitespace from the entity text
                     entity_text = entity['word'].strip()
-                    if entity['entity_group' ] == 'ORG' and entity_text in entity_names:
-                        filtered_articles_data[date]['articles'].append(article)
+                    if entity['entity_group'] == 'ORG' and entity_text in entity_names:
+                        filtered_articles_data[date]['articles'].append(
+                            article)
                         filtered_articles_data[date]['number_of_articles'] += 1
                         found_matching_entity = True  # Set the flag to true
                         break  # Exit the inner loop as we've found a matching entity
@@ -89,10 +99,11 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
         end_time = time.time()  # Store the end time
         elapsed_time = end_time - start_time  # Calculate the elapsed time
 
-        print(f"""\n\n-----------------------------------------------
-              \nProcessing for date {date} with {len(info['articles'])} articles
-              \nKept {filtered_articles_data[date]['number_of_articles']} articles 
-              \nTook {elapsed_time:.2f} seconds.""")
+        print(f"""\n-----------------------------------------------
+              {len(filtered_articles_data)}
+              Processing for date {date} with {len(info['articles'])} articles
+              Kept {filtered_articles_data[date]['number_of_articles']} 
+              Took {elapsed_time:.2f} seconds.""")
 
     # Output the filtered articles to a JSON file
     output_data = {
@@ -104,10 +115,13 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
         json.dump(output_data, output_file, ensure_ascii=False, indent=4)
 
     # Log the number of articles remaining after filtering
-    remaining_articles = sum(info['number_of_articles'] for date, info in filtered_articles_data.items())
-    logging.info(f'Number of articles remaining after filtering for {stock_symbol}: {remaining_articles}')
+    remaining_articles = sum(info['number_of_articles']
+                             for date, info in filtered_articles_data.items())
+    logging.info(
+        f'Number of articles remaining after filtering for {stock_symbol}: {remaining_articles}')
 
     print(f'Filtered articles for {stock_symbol} saved to {output_path}')
+
 
 def main():
     # Load the stock information
@@ -121,10 +135,13 @@ def main():
 
         # Load the formatted articles
         with tf.io.gfile.GFile(formatted_articles_path, 'r') as file:
-            formatted_articles = json.load(file)['data']  # Assuming the articles are under the 'data' key
+            # Assuming the articles are under the 'data' key
+            formatted_articles = json.load(file)['data']
 
         # Process the articles
-        process_articles(stock_symbol, formatted_articles, stock_info['EntityNames'])
+        process_articles(stock_symbol, formatted_articles,
+                         stock_info['EntityNames'])
+
 
 if __name__ == "__main__":
     main()
