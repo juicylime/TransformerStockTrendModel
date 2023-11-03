@@ -42,9 +42,12 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
     with strategy.scope():
         model = TFAutoModelForTokenClassification.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
         tokenizer = AutoTokenizer.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
+        
+        device = model.device
+        print(f'Model is on device: {device.type}:{device.index}')
 
         # Create the NER pipeline
-        ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True)
+        ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True, device=0)
 
     # Prepare a directory for the filtered articles
     filtered_dir = '../StockData/StockData/filtered_news_articles'
