@@ -1,8 +1,8 @@
 {
-    "LU": {
-        "Symbol": "LU",
-        "Name": "Lufax Holding Ltd",
-        "EntityNames": ["LU", "Lufax", "Lufax Holding Ltd"]
+    "GOOG": {
+        "Symbol": "GOOG",
+        "Name": "Alphabet Inc.",
+        "EntityNames": ["GOOG", "GOOGL", "Alphabet Inc", "Alphabet"]
     },
     "TSLA": {
         "Symbol": "TSLA",
@@ -33,6 +33,11 @@
         "Symbol": "AAL",
         "Name": "American Airlines Group Inc.",
         "EntityNames": ["AAL", "American Airlines", "American Airlines Group Inc."]
+    },
+    "LU": {
+        "Symbol": "LU",
+        "Name": "Lufax Holding Ltd",
+        "EntityNames": ["LU", "Lufax", "Lufax Holding Ltd"]
     },
     "BAC": {
         "Symbol": "BAC",
@@ -78,11 +83,6 @@
         "Symbol": "PFE",
         "Name": "Pfizer Inc.",
         "EntityNames": ["PFE", "Pfizer", "Pfizer Inc."]
-    },
-    "AVTR": {
-        "Symbol": "AVTR",
-        "Name": "Avantor, Inc.",
-        "EntityNames": ["AVTR", "Avantor", "Avantor, Inc."]
     },
     "ITUB": {
         "Symbol": "ITUB",
@@ -133,11 +133,6 @@
         "Symbol": "PBR",
         "Name": "Petrobras",
         "EntityNames": ["PBR", "Petrobras", "Petrobras"]
-    },
-    "GOOG": {
-        "Symbol": "GOOG",
-        "Name": "Alphabet Inc.",
-        "EntityNames": ["GOOG", "GOOGL", "Alphabet Inc", "Alphabet"]
     },
     "MSFT": {
         "Symbol": "MSFT",
