@@ -12,19 +12,14 @@ import tensorflow as tf
 import nltk
 nltk.download('punkt')
 
-# Detect hardware, return appropriate distribution strategy
-try:
-    tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
-    # print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
-except ValueError:
-    tpu = None
 
-if tpu:
-    tf.config.experimental_connect_to_cluster(tpu)
-    tf.tpu.experimental.initialize_tpu_system(tpu)
-    strategy = tf.distribute.TPUStrategy(tpu)
-else:
-    strategy = tf.distribute.get_strategy()
+tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
+
+
+
+tf.config.experimental_connect_to_cluster(tpu)
+tf.tpu.experimental.initialize_tpu_system(tpu)
+strategy = tf.distribute.TPUStrategy(tpu)
 
 print("REPLICAS: ", strategy.num_replicas_in_sync)
 
@@ -34,9 +29,27 @@ with strategy.scope():
     tokenizer = AutoTokenizer.from_pretrained(
         "ydshieh/roberta-large-ner-english")
 
-    # Create the NER pipeline
-    ner_pipeline = pipeline(
-        "ner", model=model, tokenizer=tokenizer, grouped_entities=True)
+
+
+def batch_ner_function(sentences):
+    # Tokenize the sentences
+    inputs = tokenizer(sentences, return_tensors="tf", truncation=True, padding=True)
+    # Get the model's output
+    outputs = model(inputs)
+    # Get the predicted token labels
+    predictions = tf.argmax(outputs.logits, axis=-1).numpy()
+    # Process each sentence in the batch
+    batch_entities = []
+    for sentence_predictions, input_ids in zip(predictions, inputs['input_ids']):
+        # Convert token IDs to labels
+        labels = [model.config.id2label[id] for id in sentence_predictions]
+        # Combine tokens and labels
+        tokens = tokenizer.convert_ids_to_tokens(input_ids)
+        tagged_sentence = list(zip(tokens, labels))
+        # Filter out non-entity tokens
+        entities = [(token, label) for token, label in tagged_sentence if label != 'O']
+        batch_entities.append(entities)
+    return list(zip(sentences, batch_entities))
 
 
 def setup_logging():
@@ -56,52 +69,52 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
     filtered_articles_data = defaultdict(
         lambda: {'number_of_articles': 0, 'articles': []})
 
-    for date, info in formatted_articles.items():
-        start_time = time.time()  # Store the start time
+    with strategy.scope():
 
-        for article in info['articles']:
-            # Tokenize the body text using the word_tokenize function
-            body_text = article['body']
-            tokens = word_tokenize(body_text)
+        for date, info in formatted_articles.items():
+            start_time = time.time()  # Store the start time
 
-            # Join tokens back into a single string and split into sentences
-            body_text = ' '.join(tokens)
-            sentences = sent_tokenize(body_text)
+            for article in info['articles']:
+                # Tokenize the body text using the word_tokenize function
+                body_text = article['body']
+                tokens = word_tokenize(body_text)
 
-            # Filter sentences to only include those that contain any of the specified entity names
-            relevant_sentences = [sent for sent in sentences if any(
-                name in sent for name in entity_names)]
+                # Join tokens back into a single string and split into sentences
+                body_text = ' '.join(tokens)
+                sentences = sent_tokenize(body_text)
 
-            # Skip this article if no relevant sentences are found
-            if not relevant_sentences:
-                continue
+                # Filter sentences to only include those that contain any of the specified entity names
+                relevant_sentences = [sent for sent in sentences if any(
+                    name in sent for name in entity_names)]
 
-            # Check the recognized entities for each sentence
-            found_matching_entity = False  # Initialize a flag to false
-            for sentence in relevant_sentences:
-                # Run NER on the sentence
-                entities = ner_pipeline(sentence)
-                # Check if any of the entities match the specified entity names and are organizations
-                for entity in entities:
-                    # Remove leading and trailing whitespace from the entity text
-                    entity_text = entity['word'].strip()
-                    if entity['entity_group'] == 'ORG' and entity_text in entity_names:
-                        filtered_articles_data[date]['articles'].append(
-                            article)
-                        filtered_articles_data[date]['number_of_articles'] += 1
-                        found_matching_entity = True  # Set the flag to true
-                        break  # Exit the inner loop as we've found a matching entity
-                if found_matching_entity:
-                    break  # Exit the outer loop as we've found a matching entity
+                # Skip this article if no relevant sentences are found
+                if not relevant_sentences:
+                    continue
 
-        end_time = time.time()  # Store the end time
-        elapsed_time = end_time - start_time  # Calculate the elapsed time
+                # Check for the presence of specified entities and if they are organizations
+                sentence_entities = batch_ner_function(sentences)
 
-        print(f"""\n-----------------------------------------------
-              {len(filtered_articles_data)}
-              Processing for date {date} with {len(info['articles'])} articles
-              Kept {filtered_articles_data[date]['number_of_articles']} 
-              Took {elapsed_time:.2f} seconds.""")
+                # Check the recognized entities for each sentence
+                found_matching_entity = False  # Initialize a flag to false
+                for sentence, entities in sentence_entities:
+                    for entity in entities:
+                        entity_text, entity_type = entity
+                        if entity_type == 'ORG' and entity_text in entity_names:
+                            filtered_articles_data[date]['articles'].append(article)
+                            filtered_articles_data[date]['number_of_articles'] += 1
+                            found_matching_entity = True  # Set the flag to true
+                            break  # Exit the inner loop as we've found a matching entity
+                    if found_matching_entity:
+                        break  # Exit the outer loop as we've found a matching entity
+
+            end_time = time.time()  # Store the end time
+            elapsed_time = end_time - start_time  # Calculate the elapsed time
+
+            print(f"""\n-----------------------------------------------
+                {len(filtered_articles_data)}
+                Processing for date {date} with {len(info['articles'])} articles
+                Kept {filtered_articles_data[date]['number_of_articles']} 
+                Took {elapsed_time:.2f} seconds.""")
 
     # Output the filtered articles to a JSON file
     output_data = {
