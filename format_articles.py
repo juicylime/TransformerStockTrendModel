@@ -7,7 +7,7 @@ def format_data(ticker_symbol, entity_names, data):
     grouped_data = defaultdict(lambda: {'number_of_articles': 0, 'articles': []})
 
     # Prepare entity names prefix
-    entity_prefix = ''.join(f'[ENT]{entity}[/ENT]' for entity in entity_names)
+    # entity_prefix = ''.join(f'[ENT]{entity}[/ENT]' for entity in entity_names)
 
     for item in data:
         # Skip articles that have missing body
@@ -29,7 +29,7 @@ def format_data(ticker_symbol, entity_names, data):
             'match_score': item.get('_score', ''),
             'author': item.get('author', ''),
             'title': item.get('title', ''),
-            'body': f'{entity_prefix} ' + item.get('summary', '')
+            'body': item.get('summary', '')
         }
 
         # Group the item by date and update the count
