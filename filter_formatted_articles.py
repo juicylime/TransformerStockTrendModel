@@ -8,6 +8,7 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
 import tensorflow as tf
 from tensorflow.python.profiler import profiler_client
+import subprocess
 
 # Ensure NLTK data is downloaded (used for sentence tokenization)
 import nltk
@@ -30,6 +31,8 @@ else:
 print("REPLICAS: ", strategy.num_replicas_in_sync)
 
 with strategy.scope():
+    tensorboard_process = subprocess.Popen(['tensorboard', '--logdir', '../tensorboard/logs', '--bind_all'])
+
     model = TFAutoModelForTokenClassification.from_pretrained(
         "Jean-Baptiste/roberta-large-ner-english")
     tokenizer = AutoTokenizer.from_pretrained(
