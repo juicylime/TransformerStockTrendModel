@@ -30,9 +30,9 @@ print("REPLICAS: ", strategy.num_replicas_in_sync)
 
 with strategy.scope():
     model = TFAutoModelForTokenClassification.from_pretrained(
-        "ydshieh/roberta-large-ner-english")
+        "dbmdz/bert-large-cased-finetuned-conll03-english")
     tokenizer = AutoTokenizer.from_pretrained(
-        "ydshieh/roberta-large-ner-english")
+        "dbmdz/bert-large-cased-finetuned-conll03-english")
 
     # Create the NER pipeline
     ner_pipeline = pipeline(
