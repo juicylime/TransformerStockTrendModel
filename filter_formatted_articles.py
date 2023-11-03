@@ -46,12 +46,6 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
     logging.info(f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
     print(f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
 
-   
-
-    # Prepare a directory for the filtered articles
-    filtered_dir = '../StockData/StockData/filtered_news_articles'
-    os.makedirs(filtered_dir, exist_ok=True)
-
     filtered_articles_data = defaultdict(lambda: {'number_of_articles': 0, 'articles': []})
 
     for date, info in formatted_articles.items():
@@ -95,15 +89,18 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
         end_time = time.time()  # Store the end time
         elapsed_time = end_time - start_time  # Calculate the elapsed time
 
-        print(f"Processing for date {date} with {len(info['articles'])} articles: Took {elapsed_time:.2f} seconds.")
+        print(f"\n\n-----------------------------------------------
+              \nProcessing for date {date} with {len(info['articles'])} articles
+              \nKept {filtered_articles_data[date]['number_of_articles']} articles 
+              \nTook {elapsed_time:.2f} seconds.")
 
     # Output the filtered articles to a JSON file
     output_data = {
         'total_articles': sum(info['number_of_articles'] for date, info in filtered_articles_data.items()),
         'data': filtered_articles_data
     }
-    output_path = os.path.join(filtered_dir, f'filtered_{stock_symbol}_articles.json')
-    with open(output_path, 'w', encoding='utf-8') as output_file:
+    output_path = f'gs://pp_bucket_pp/StockData/filtered_news_articles/filtered_{stock_symbol}_articles.json'
+    with tf.io.gfile.GFile(output_path, 'w') as output_file:
         json.dump(output_data, output_file, ensure_ascii=False, indent=4)
 
     # Log the number of articles remaining after filtering
@@ -120,10 +117,10 @@ def main():
     # Process each stock
     for stock_symbol, stock_info in stocks.items():
         # Define the path to the formatted articles JSON file
-        formatted_articles_path = f'../StockData/StockData/formatted_news_articles/formatted_{stock_symbol}_articles.json'
+        formatted_articles_path = f'gs://pp_bucket_pp/StockData/formatted_news_articles/formatted_{stock_symbol}_articles.json'
 
         # Load the formatted articles
-        with open(formatted_articles_path, 'r') as file:
+        with tf.io.gfile.GFile(formatted_articles_path, 'r') as file:
             formatted_articles = json.load(file)['data']  # Assuming the articles are under the 'data' key
 
         # Process the articles
