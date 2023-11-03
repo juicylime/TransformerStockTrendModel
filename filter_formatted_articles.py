@@ -82,7 +82,8 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
             found_matching_entity = False  # Initialize a flag to false
             for sentence in relevant_sentences:
                 # Run NER on the sentence
-                entities = ner_pipeline(sentence)
+                with strategy.scope():
+                    entities = ner_pipeline(sentence)
                 # Check if any of the entities match the specified entity names and are organizations
                 for entity in entities:
                     # Remove leading and trailing whitespace from the entity text
