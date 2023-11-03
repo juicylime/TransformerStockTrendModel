@@ -8,9 +8,34 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
 import tensorflow as tf
 
+tf.debugging.set_log_device_placement(True)
+
 # Ensure NLTK data is downloaded (used for sentence tokenization)
 import nltk
 nltk.download('punkt')
+
+# Detect hardware, return appropriate distribution strategy
+try:
+    tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
+    # print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
+except ValueError:
+    tpu = None
+
+if tpu:
+    tf.config.experimental_connect_to_cluster(tpu)
+    tf.tpu.experimental.initialize_tpu_system(tpu)
+    strategy = tf.distribute.TPUStrategy(tpu)
+else:
+    strategy = tf.distribute.get_strategy()
+
+print("REPLICAS: ", strategy.num_replicas_in_sync)
+
+with strategy.scope():
+    model = TFAutoModelForTokenClassification.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
+    tokenizer = AutoTokenizer.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
+
+    # Create the NER pipeline
+    ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True, device=0)
 
 def setup_logging():
     logging.basicConfig(filename='article_processing.log', level=logging.INFO,
@@ -23,31 +48,7 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
     logging.info(f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
     print(f'Starting processing for stock: {stock_symbol}. Total articles: {len(formatted_articles)}')
 
-    # Detect hardware, return appropriate distribution strategy
-    try:
-        tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
-        # print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
-    except ValueError:
-        tpu = None
-
-    if tpu:
-        tf.config.experimental_connect_to_cluster(tpu)
-        tf.tpu.experimental.initialize_tpu_system(tpu)
-        strategy = tf.distribute.TPUStrategy(tpu)
-    else:
-        strategy = tf.distribute.get_strategy()
-
-    print("REPLICAS: ", strategy.num_replicas_in_sync)
-
-    with strategy.scope():
-        model = TFAutoModelForTokenClassification.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
-        tokenizer = AutoTokenizer.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
-        
-        device = model.device
-        print(f'Model is on device: {device.type}:{device.index}')
-
-        # Create the NER pipeline
-        ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True, device=0)
+   
 
     # Prepare a directory for the filtered articles
     filtered_dir = '../StockData/StockData/filtered_news_articles'
