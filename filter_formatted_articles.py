@@ -8,8 +8,6 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
 import tensorflow as tf
 
-tf.debugging.set_log_device_placement(True)
-
 # Ensure NLTK data is downloaded (used for sentence tokenization)
 import nltk
 nltk.download('punkt')
