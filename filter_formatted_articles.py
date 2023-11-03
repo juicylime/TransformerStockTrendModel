@@ -125,7 +125,7 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
 
 
 def main():
-    tf.profiler.experimental.start('logs')
+    tf.profiler.experimental.start('../tensorboard/logs')
     # Load the stock information
     with open('stock_list.json', 'r') as file:
         stocks = json.load(file)
@@ -145,6 +145,6 @@ def main():
                          stock_info['EntityNames'])
 
         tf.profiler.experimental.stop()
-        
+
 if __name__ == "__main__":
     main()
