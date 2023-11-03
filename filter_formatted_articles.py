@@ -58,44 +58,43 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
 
     for date, info in formatted_articles.items():
         start_time = time.time()  # Store the start time
+        with strategy.scope():
+            for article in info['articles']:
+                # Remove the [ENT]...[/ENT] tokens and the values in between
+                body_text = re.sub(r'\[ENT\].*?\[\/ENT\]', '', article['body'])
 
-        for article in info['articles']:
-            # Remove the [ENT]...[/ENT] tokens and the values in between
-            body_text = re.sub(r'\[ENT\].*?\[\/ENT\]', '', article['body'])
+                # Tokenize the body text using the word_tokenize function
+                tokens = word_tokenize(body_text)
 
-            # Tokenize the body text using the word_tokenize function
-            tokens = word_tokenize(body_text)
+                # Join tokens back into a single string and split into sentences
+                body_text = ' '.join(tokens)
+                sentences = sent_tokenize(body_text)
 
-            # Join tokens back into a single string and split into sentences
-            body_text = ' '.join(tokens)
-            sentences = sent_tokenize(body_text)
+                # Filter sentences to only include those that contain any of the specified entity names
+                relevant_sentences = [sent for sent in sentences if any(
+                    name in sent for name in entity_names)]
 
-            # Filter sentences to only include those that contain any of the specified entity names
-            relevant_sentences = [sent for sent in sentences if any(
-                name in sent for name in entity_names)]
+                # Skip this article if no relevant sentences are found
+                if not relevant_sentences:
+                    continue
 
-            # Skip this article if no relevant sentences are found
-            if not relevant_sentences:
-                continue
-
-            # Check the recognized entities for each sentence
-            found_matching_entity = False  # Initialize a flag to false
-            for sentence in relevant_sentences:
-                # Run NER on the sentence
-                with strategy.scope():
+                # Check the recognized entities for each sentence
+                found_matching_entity = False  # Initialize a flag to false
+                for sentence in relevant_sentences:
+                    # Run NER on the sentence
                     entities = ner_pipeline(sentence)
-                # Check if any of the entities match the specified entity names and are organizations
-                for entity in entities:
-                    # Remove leading and trailing whitespace from the entity text
-                    entity_text = entity['word'].strip()
-                    if entity['entity_group'] == 'ORG' and entity_text in entity_names:
-                        filtered_articles_data[date]['articles'].append(
-                            article)
-                        filtered_articles_data[date]['number_of_articles'] += 1
-                        found_matching_entity = True  # Set the flag to true
-                        break  # Exit the inner loop as we've found a matching entity
-                if found_matching_entity:
-                    break  # Exit the outer loop as we've found a matching entity
+                    # Check if any of the entities match the specified entity names and are organizations
+                    for entity in entities:
+                        # Remove leading and trailing whitespace from the entity text
+                        entity_text = entity['word'].strip()
+                        if entity['entity_group'] == 'ORG' and entity_text in entity_names:
+                            filtered_articles_data[date]['articles'].append(
+                                article)
+                            filtered_articles_data[date]['number_of_articles'] += 1
+                            found_matching_entity = True  # Set the flag to true
+                            break  # Exit the inner loop as we've found a matching entity
+                    if found_matching_entity:
+                        break  # Exit the outer loop as we've found a matching entity
 
         end_time = time.time()  # Store the end time
         elapsed_time = end_time - start_time  # Calculate the elapsed time
