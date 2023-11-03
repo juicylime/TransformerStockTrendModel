@@ -89,10 +89,10 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
         end_time = time.time()  # Store the end time
         elapsed_time = end_time - start_time  # Calculate the elapsed time
 
-        print(f"\n\n-----------------------------------------------
+        print(f"""\n\n-----------------------------------------------
               \nProcessing for date {date} with {len(info['articles'])} articles
               \nKept {filtered_articles_data[date]['number_of_articles']} articles 
-              \nTook {elapsed_time:.2f} seconds.")
+              \nTook {elapsed_time:.2f} seconds.""")
 
     # Output the filtered articles to a JSON file
     output_data = {
