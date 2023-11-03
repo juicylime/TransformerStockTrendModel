@@ -1,4 +1,9 @@
 {
+    "LU": {
+        "Symbol": "LU",
+        "Name": "Lufax Holding Ltd",
+        "EntityNames": ["LU", "Lufax", "Lufax Holding Ltd"]
+    },
     "GOOG": {
         "Symbol": "GOOG",
         "Name": "Alphabet Inc.",
@@ -33,11 +38,6 @@
         "Symbol": "AAL",
         "Name": "American Airlines Group Inc.",
         "EntityNames": ["AAL", "American Airlines", "American Airlines Group Inc."]
-    },
-    "LU": {
-        "Symbol": "LU",
-        "Name": "Lufax Holding Ltd",
-        "EntityNames": ["LU", "Lufax", "Lufax Holding Ltd"]
     },
     "BAC": {
         "Symbol": "BAC",
