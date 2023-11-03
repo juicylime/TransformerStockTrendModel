@@ -43,8 +43,8 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
         model = TFAutoModelForTokenClassification.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
         tokenizer = AutoTokenizer.from_pretrained("Jean-Baptiste/roberta-large-ner-english")
 
-     # Create the NER pipeline
-    ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True)
+        # Create the NER pipeline
+        ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer, grouped_entities=True)
 
     # Prepare a directory for the filtered articles
     filtered_dir = '../StockData/StockData/filtered_news_articles'
