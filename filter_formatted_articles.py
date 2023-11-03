@@ -7,6 +7,7 @@ from collections import defaultdict
 from nltk.tokenize import sent_tokenize, word_tokenize
 from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
 import tensorflow as tf
+import tensorflow.compat.v2 as tf2
 
 # Ensure NLTK data is downloaded (used for sentence tokenization)
 import nltk
@@ -124,7 +125,7 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
 
 
 def main():
-    tf.profiler.experimental.server.start(6006)
+    tf2.profiler.experimental.server.start(6000)
     # Load the stock information
     with open('stock_list.json', 'r') as file:
         stocks = json.load(file)
