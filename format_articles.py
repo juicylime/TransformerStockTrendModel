@@ -7,11 +7,14 @@ def format_data(ticker_symbol, entity_names, data):
     grouped_data = defaultdict(lambda: {'number_of_articles': 0, 'articles': []})
 
     # Prepare entity names prefix
-    entity_prefix = ''.join(f'[ENT]{entity}[/ENT]' for entity in entity_names)
+    # entity_prefix = ''.join(f'[ENT]{entity}[/ENT]' for entity in entity_names)
 
     for item in data:
         # Skip articles that have missing body
         if item.get('summary', '') is None:
+            continue
+
+        if item.get('topic', '') == 'sport' or item.get('topic', '') == 'gaming':
             continue
 
         # Extract the date from the 'published_at' field
@@ -26,7 +29,7 @@ def format_data(ticker_symbol, entity_names, data):
             'match_score': item.get('_score', ''),
             'author': item.get('author', ''),
             'title': item.get('title', ''),
-            'body': f'{entity_prefix} ' + item.get('summary', '')
+            'body': item.get('summary', '')
         }
 
         # Group the item by date and update the count
@@ -41,13 +44,13 @@ def main():
         stock_list = json.load(file)
 
     # Create formatted_news_articles directory if it doesn't exist
-    formatted_dir = 'G:\\StockData\\formatted_news_articles'
+    formatted_dir = '..\\StockData\\formatted_news_articles'
     if not os.path.exists(formatted_dir):
         os.makedirs(formatted_dir)
 
     for ticker_symbol, info in stock_list.items():
         # Load the original data from the respective news articles file
-        file_path = f'G:\\StockData\\news_articles\\{ticker_symbol}_news_articles.json'
+        file_path = f'..\\StockData\\news_articles\\{ticker_symbol}_news_articles.json'
         if os.path.exists(file_path):
             with open(file_path, 'r') as input_file:
                 original_data = json.load(input_file)
