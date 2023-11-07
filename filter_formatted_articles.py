@@ -1,29 +1,13 @@
 import os
 import time
 import json
-import re
 from collections import defaultdict
 from flair.data import Sentence
 from flair.models import SequenceTagger
 from flair import device
-# from nltk.tokenize import sent_tokenize
 import torch
-import spacy
 
-# Ensure NLTK data is downloaded (used for sentence tokenization)
-# import nltk
-# nltk.download('punkt')
-# Load SpaCy model
-nlp = spacy.load("en_core_web_sm", disable=["parser", "ner"])
-# Add the sentencizer component to the pipeline.
-nlp.add_pipe('sentencizer')
-
-def tokenize(text):
-    # Processing the document and extracting sentences
-    doc = nlp(text)
-    return [sent.text for sent in doc.sents]
-
-def process_articles(stock_symbol, formatted_articles, entity_names):
+def process_articles(stock_symbol, tokenized_articles, original_articles, entity_names):
     # Load the NER tagger model
     tagger = SequenceTagger.load('flair/ner-english-fast')
 
@@ -33,7 +17,7 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
 
     filtered_articles_data = defaultdict(lambda: {'number_of_articles': 0, 'articles': []})
     article_num = 0 
-    for date, info in formatted_articles.items():
+    for date, info in tokenized_articles.items():
         start_time = time.time() # Store the start time
         article_num += 1
         # Collect all relevant sentences and their mapping to the original article index
@@ -42,10 +26,10 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
 
         processed_articles_set = set()  # Set to track processed articles for the date
 
-        # Tokenize and collect sentences for each article
+        # Use the pre-tokenized sentences for each article
         for article_idx, article in enumerate(info['articles']):
-            sentences = tokenize(article['body'])
-            relevant_sentences = [Sentence(sent) for sent in sentences if any(entity_name in sent for entity_name in entity_names)]
+            relevant_sentences = [Sentence(sent, use_tokenizer=False) for sent in article['tokenized_body'] 
+                                  if any(entity_name in sent for entity_name in entity_names)]
             article_to_sentences[article_idx].extend(relevant_sentences)
             all_sentences.extend(relevant_sentences)
 
@@ -63,7 +47,8 @@ def process_articles(stock_symbol, formatted_articles, entity_names):
                 for entity in sentence.get_spans('ner'):
                     if entity.tag == 'ORG' and any(entity_name in entity.text for entity_name in entity_names):
                         if article_idx not in processed_articles_set:
-                            original_article = info['articles'][article_idx]
+                            # Append the original article here
+                            original_article = original_articles['data'][date]['articles'][article_idx]
                             filtered_articles_data[date]['articles'].append(original_article)
                             filtered_articles_data[date]['number_of_articles'] += 1
                             processed_articles_set.add(article_idx)
@@ -103,15 +88,18 @@ def main():
 
     # Process each stock
     for stock_symbol, stock_info in stocks.items():
-        # Define the path to the formatted articles JSON file
-        formatted_articles_path = f'../StockData/formatted_news_articles/formatted_{stock_symbol}_articles.json'
+        # Define the path to the tokenized and original articles JSON file
+        tokenized_articles_path = f'../StockData/tokenized_news_articles/tokenized_{stock_symbol}_articles.json'
+        original_articles_path = f'../StockData/formatted_news_articles/formatted_{stock_symbol}_articles.json'
 
-        # Load the formatted articles
-        with open(formatted_articles_path, 'r') as file:
-            formatted_articles = json.load(file)['data']  # Assuming the articles are under the 'data' key
+        # Load the tokenized and original articles
+        with open(tokenized_articles_path, 'r') as file:
+            tokenized_articles = json.load(file)
+        with open(original_articles_path, 'r') as file:
+            original_articles = json.load(file)
 
         # Process the articles
-        process_articles(stock_symbol, formatted_articles, stock_info['EntityNames'])
+        process_articles(stock_symbol, tokenized_articles, original_articles, stock_info['EntityNames'])
 
 if __name__ == "__main__":
     main()

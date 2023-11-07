@@ -43,7 +43,7 @@ def tokenize_articles_by_date(formatted_articles):
         # Prepare the texts for batch tokenization
         texts = [article['body'] for article in info['articles']]
         # Tokenize the texts as a batch
-        tokenized_docs = list(nlp.pipe(texts, batch_size=50))  # Adjust the batch size based on your needs and system capabilities
+        tokenized_docs = list(nlp.pipe(texts, batch_size=20))  # Adjust the batch size based on your needs and system capabilities
         tokenized_articles = []
         for doc, article in zip(tokenized_docs, info['articles']):
             tokenized_sentences = [" ".join(token.text for token in sent) for sent in doc.sents]
