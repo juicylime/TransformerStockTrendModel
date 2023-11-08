@@ -41,18 +41,40 @@ sorted_earnings_dates = {
     for company, reports in earnings_data.items()
 }
 
+# Function to find the earliest report date for earnings and income statements
+def find_earliest_dates(financial_data):
+    earliest_date = None
+    for report_date in financial_data.keys():
+        date_obj = datetime.strptime(report_date, '%Y-%m-%d').date()
+        if earliest_date is None or date_obj < earliest_date:
+            earliest_date = date_obj
+    return earliest_date
+
 combined_stock_data = {}
 for company, dates in stock_data.items():
+    # Debugging: Print the company being processed
+    print(f"Processing {company}")
+
     combined_stock_data[company] = {}
     financial_data = indexed_financials.get(company)
     earnings_dates = sorted_earnings_dates.get(company, [])
+
+    # Find the earliest dates for earnings and income statements
+    earliest_financial_date = find_earliest_dates(financial_data)
+    
+    # If there are no financial reports, skip this company
+    if not earliest_financial_date:
+        continue
     
     for date in sorted(dates.keys()):
+        date_obj = datetime.strptime(date, '%Y-%m-%d').date()
+
+        # Skip dates before the earliest financial report date
+        if date_obj < earliest_financial_date:
+            continue
+
         # Ensure we start with the stock data for the date
         combined_stock_data[company][date] = dates[date]
-
-        # Add the most recent earnings and income data before the stock date
-        date_obj = datetime.strptime(date, '%Y-%m-%d').date()
         most_recent_financial_data = None
         for report_date, report_data in sorted(financial_data.items(), key=lambda x: datetime.strptime(x[0], '%Y-%m-%d'), reverse=True):
             if datetime.strptime(report_date, '%Y-%m-%d').date() <= date_obj:
@@ -80,5 +102,5 @@ for company, dates in stock_data.items():
             combined_stock_data[company][date]['Next_Earnings_Report_Date'] = next_earnings_date.strftime('%Y-%m-%d')
 
 # Output the combined and sorted data
-with open('combined_stock_data.json', 'w') as file:
+with open('G:/StockData/combined_stock_data.json', 'w') as file:
     json.dump(combined_stock_data, file, indent=4)

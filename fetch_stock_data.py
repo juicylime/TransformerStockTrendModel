@@ -3,6 +3,7 @@ import json
 import pandas_ta as ta
 from datetime import datetime, timedelta
 import pytz
+from fetch_closing_prices import fetch_closing_prices
 
 def fetch_stock_data(ticker, start_date, end_date):
     stock = yf.Ticker(ticker)
@@ -104,10 +105,18 @@ def main():
         all_data[stock] = stock_data.to_dict(orient='index')
     
     # Saving data to JSON
-    with open('stock_data.json', 'w') as f:
+    with open('G:/StockData/stock_data.json', 'w') as f:
         json.dump(all_data, f, indent=4)
     
     print("Data saved to stock_data.json")
+
+    # List of SPDR sector fund tickers
+    spdr_tickers = ["XLY", "XLP", "XLE", "XLF", "XLV", "XLI", "XLB", "XLRE", "XLK", "XLU", "XLC"]
+    fetch_closing_prices(spdr_tickers, start_date, end_date, "G:/StockData/market_data/spdr_closing_prices.json")
+
+    # List of ETF tickers to track major markets
+    etf_tickers = ["MCHI", "VGK", "EWJ", "VWO", "VXUS", "VT"]
+    fetch_closing_prices(etf_tickers, start_date, end_date, "G:/StockData/market_data/etf_closing_prices.json")
 
 if __name__ == "__main__":
     main()
