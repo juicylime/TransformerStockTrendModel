@@ -1,0 +1,87 @@
+11/07/2023 03:57:19 PM - INFO - Processing articles for AAPL
+11/07/2023 04:00:40 PM - INFO - Processing articles for TSLA
+
+11/07/2023 04:24:37 PM - INFO - Processing articles for BAC
+11/07/2023 04:25:26 PM - INFO - Processing articles for BBD
+11/07/2023 04:34:03 PM - INFO - Processing articles for AMD
+11/07/2023 04:47:04 PM - INFO - Processing articles for AAL
+11/07/2023 04:48:16 PM - INFO - Processing articles for AMZN
+11/07/2023 04:52:42 PM - INFO - Processing articles for BCS
+11/07/2023 04:59:08 PM - INFO - Processing articles for UBER
+11/07/2023 05:04:21 PM - INFO - Processing articles for INTC
+11/07/2023 05:07:14 PM - INFO - Processing articles for LCID
+11/07/2023 05:13:00 PM - INFO - Processing articles for VALE
+11/07/2023 05:14:48 PM - INFO - Processing articles for SRC
+11/07/2023 05:36:08 PM - INFO - Processing articles for CCL
+11/07/2023 05:36:44 PM - INFO - Processing articles for VZ
+11/07/2023 05:45:07 PM - INFO - Processing articles for META
+11/07/2023 05:49:00 PM - INFO - Processing articles for BMY
+11/07/2023 05:49:38 PM - INFO - Processing articles for ITUB
+11/07/2023 06:02:53 PM - INFO - Processing articles for XOM
+11/07/2023 06:10:41 PM - INFO - Processing articles for PFE
+11/07/2023 06:24:29 PM - ERROR - Exception occurred while processing articles for AGNC: cuDNN error: CUDNN_STATUS_EXECUTION_FAILED
+Traceback (most recent call last):
+  File "C:\Users\Ankit\Documents\Amans_AI_project\TransformerStockTrendModel\filter_formatted_articles.py", line 81, in process_articles
+    tagger.predict(sentence_batch)
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\flair\models\sequence_tagger_model.py", line 490, in predict
+    sentence_tensor, lengths = self._prepare_tensors(batch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\flair\models\sequence_tagger_model.py", line 287, in _prepare_tensors
+    self.embeddings.embed(sentences)
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\flair\embeddings\token.py", line 100, in embed
+    embedding.embed(sentences)
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\flair\embeddings\base.py", line 50, in embed
+    self._add_embeddings_internal(data_points)
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\flair\embeddings\token.py", line 818, in _add_embeddings_internal
+    all_hidden_states_in_lm = self.lm.get_representation(
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\flair\models\language_model.py", line 160, in get_representation
+    rnn_output, hidden = self.forward(batch, hidden, decode=False)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\flair\models\language_model.py", line 88, in forward
+    output, hidden = self.rnn(emb, hidden)
+                     ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\rnn.py", line 879, in forward
+    result = _VF.lstm(input, hx, self._flat_weights, self.bias, self.num_layers,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: cuDNN error: CUDNN_STATUS_EXECUTION_FAILED
+11/07/2023 06:24:31 PM - ERROR - Exception occurred while processing articles for NOK: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+Traceback (most recent call last):
+  File "C:\Users\Ankit\Documents\Amans_AI_project\TransformerStockTrendModel\filter_formatted_articles.py", line 81, in process_articles
+    tagger.predict(sentence_batch)
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\flair\models\sequence_tagger_model.py", line 482, in predict
+    overall_loss = torch.zeros(1, device=flair.device)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+11/07/2023 06:24:32 PM - ERROR - Exception occurred while processing articles for PBR: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+Traceback (most recent call last):
+  File "C:\Users\Ankit\Documents\Amans_AI_project\TransformerStockTrendModel\filter_formatted_articles.py", line 81, in process_articles
+    tagger.predict(sentence_batch)
+  File "C:\Users\Ankit\AppData\Local\Programs\Python\Python311\Lib\site-packages\flair\models\sequence_tagger_model.py", line 482, in predict
+    overall_loss = torch.zeros(1, device=flair.device)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+11/07/2023 06:32:15 PM - INFO - Processing articles for MSFT
+11/08/2023 09:03:13 AM - INFO - Processing articles for NOK
+11/08/2023 09:21:14 AM - INFO - Processing articles for PBR
+11/08/2023 09:28:02 AM - INFO - Processing articles for AGNC
