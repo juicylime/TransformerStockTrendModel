@@ -60,9 +60,16 @@ def process_articles(stock_symbol, tokenized_articles, entity_names):
 
             for article_idx, article in enumerate(articles):
                 all_sentences = [Sentence(sent, use_tokenizer=False) for sent in article['tokenized_body']]
-                tagger.predict(all_sentences)
-
                 matching_sentences = []
+               
+                # Process sentences in batches
+                batch_size = 20  # Define the batch size
+                for batch_start in range(0, len(all_sentences), batch_size):
+                    sentence_batch = all_sentences[batch_start:batch_start + batch_size]
+                    tagger.predict(sentence_batch)
+
+                torch.cuda.empty_cache()  # Clear the CUDA cache
+
                 for sentence in all_sentences:
                     for entity in sentence.get_spans('ner'):
                         if entity.tag == 'ORG' and any(entity_name in entity.text for entity_name in entity_names):
@@ -79,7 +86,6 @@ def process_articles(stock_symbol, tokenized_articles, entity_names):
                     filtered_articles_data[date]['number_of_articles'] += 1
                     total_articles += 1
 
-            # torch.cuda.empty_cache()  # Clear the CUDA cache
             gc.collect()  # Force garbage collection
             end_time = time.time()
             elapsed_time = end_time - start_time
