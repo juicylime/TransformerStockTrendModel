@@ -25,7 +25,7 @@ def main():
             all_income_statement_data.update(income_statement_data)
         sleep(5)  # Sleep for 12 seconds to avoid hitting rate limits
 
-    with open('income_statement_data_2.json', 'w') as f:
+    with open('income_statement_data_1.json', 'w') as f:
         json.dump(all_income_statement_data, f, indent=4)
 
 if __name__ == "__main__":

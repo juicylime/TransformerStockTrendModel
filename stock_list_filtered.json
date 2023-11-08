@@ -1,6 +1,21 @@
 {
-    "GOLD": {
-        "Symbol": "GOLD",
-        "Name": "Barrick Gold Corporation"
+    "GOOG": {
+        "Symbol": "GOOG",
+        "Name": "Alphabet Inc.",
+        "EntityNames": [
+            "GOOG",
+            "GOOGL",
+            "Alphabet Inc",
+            "Alphabet"
+        ]
+    },
+    "MSFT": {
+        "Symbol": "MSFT",
+        "Name": "Microsoft Corp",
+        "EntityNames": [
+            "MSFT",
+            "Microsoft",
+            "Microsoft Corp"
+        ]
     }
 }

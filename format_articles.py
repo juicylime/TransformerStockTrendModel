@@ -14,7 +14,7 @@ def format_data(ticker_symbol, entity_names, data):
         if item.get('summary', '') is None:
             continue
 
-        if item.get('topic', '') == 'gaming' or item.get('topic', '') == 'sport':
+        if item.get('topic', '') == 'sport' or item.get('topic', '') == 'gaming':
             continue
 
         # Extract the date from the 'published_at' field
@@ -29,7 +29,8 @@ def format_data(ticker_symbol, entity_names, data):
             'match_score': item.get('_score', ''),
             'author': item.get('author', ''),
             'title': item.get('title', ''),
-            'body': item.get('summary', '')
+            'body': item.get('summary', ''),
+            'topic': item.get('topic', '')
         }
 
         # Group the item by date and update the count
@@ -40,7 +41,7 @@ def format_data(ticker_symbol, entity_names, data):
 
 def main():
     # Load the list of stocks from the specified JSON file
-    with open('stock_list.json', 'r') as file:
+    with open('stock_list_filtered.json', 'r') as file:
         stock_list = json.load(file)
 
     # Create formatted_news_articles directory if it doesn't exist
