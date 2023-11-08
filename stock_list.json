@@ -1,13 +1,4 @@
 {
-    "LU": {
-        "Symbol": "LU",
-        "Name": "Lufax Holding Ltd",
-        "EntityNames": [
-            "LU",
-            "Lufax",
-            "Lufax Holding Ltd"
-        ]
-    },
     "TSLA": {
         "Symbol": "TSLA",
         "Name": "Tesla, Inc.",
@@ -141,9 +132,9 @@
         "Name": "Meta, Inc.",
         "EntityNames": [
             "META",
-            "Meta",
             "Facebook",
-            "Meta, Inc."
+            "Meta, Inc.",
+            "Meta Platforms Inc"
         ]
     },
     "VALE": {

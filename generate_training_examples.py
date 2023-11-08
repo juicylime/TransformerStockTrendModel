@@ -12,7 +12,7 @@ def calculate_correlation(stocks_data, base_prices):
             print(f"Calculated correlation for {stock}")
     return correlations
 
-def create_training_examples(input_file, n=30, chunk_size=100):
+def create_training_examples(input_file, n=120, chunk_size=100):
     with open(input_file, 'r') as file:
         data = json.load(file)
 
@@ -27,7 +27,7 @@ def create_training_examples(input_file, n=30, chunk_size=100):
         sorted_dates = sorted(dates.keys())
 
         # Define the directory for the output files
-        output_dir = f"G:/StockData/training_examples/{stock_symbol}/"
+        output_dir = f"G:/StockData/training_examples_n_{n}/{stock_symbol}/"
         # Create the directory if it does not exist
         os.makedirs(output_dir, exist_ok=True)
 

@@ -9,6 +9,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 import gc
 import torch
+import os
 
 # Set up the log directory
 log_directory = "./logs"
@@ -41,77 +42,52 @@ def worker_initializer():
         print(f'Loading the model for process {current_process().pid}')
         ner_model = SequenceTagger.load('flair/ner-english-fast')
 
-def process_articles(stock_symbol, tokenized_articles, original_articles, entity_names):
-    # Use the globally loaded NER tagger model
+def process_articles(stock_symbol, tokenized_articles, entity_names):
     global ner_model
     tagger = ner_model
     try:
-        # Prepare a directory for the filtered articles
-        filtered_dir = '../StockData/filtered_news_articles'
+        filtered_dir = 'G:/StockData/filtered_news_articles_sentences'
         os.makedirs(filtered_dir, exist_ok=True)
 
         filtered_articles_data = defaultdict(lambda: {'number_of_articles': 0, 'articles': []})
-        article_num = 0 
+        days_processed = 0  # Variable to count days processed
+        
+        total_articles = 0
+
         for date, articles in tokenized_articles.items():
-            start_time = time.time() # Store the start time
-            article_num += 1
-            # Collect all relevant sentences and their mapping to the original article index
-            all_sentences = []
-            article_to_sentences = defaultdict(list)
+            start_time = time.time()
+            days_processed += 1  # Increment the days processed count
 
-            processed_articles_set = set()  # Set to track processed articles for the date
-
-            # Use the pre-tokenized sentences for each article
             for article_idx, article in enumerate(articles):
-                relevant_sentences = [Sentence(sent, use_tokenizer=False) for sent in article['tokenized_body'] 
-                                    if any(entity_name in sent for entity_name in entity_names)]
-                article_to_sentences[article_idx].extend(relevant_sentences)
-                all_sentences.extend(relevant_sentences)
+                all_sentences = [Sentence(sent, use_tokenizer=False) for sent in article['tokenized_body']]
+                tagger.predict(all_sentences)
 
-            # Skip date if no relevant sentences are found
-            if not all_sentences:
-                continue
-
-            # Run NER on the sentences in batches of 40
-            batch_size = 40
-            for batch_start in range(0, len(all_sentences), batch_size):
-                batch_end = batch_start + batch_size
-                sentence_batch = all_sentences[batch_start:batch_end]
-                tagger.predict(sentence_batch)
-            
-            torch.cuda.empty_cache()
-
-            # After NER, map recognized entities back to the original articles
-            for article_idx, sentences in article_to_sentences.items():
-                found_matching_entity = False
-                for sentence in sentences:
+                matching_sentences = []
+                for sentence in all_sentences:
                     for entity in sentence.get_spans('ner'):
                         if entity.tag == 'ORG' and any(entity_name in entity.text for entity_name in entity_names):
-                            if article_idx not in processed_articles_set:
-                                # Append the original article here
-                                original_article = original_articles['data'][date]['articles'][article_idx]
-                                filtered_articles_data[date]['articles'].append(original_article)
-                                filtered_articles_data[date]['number_of_articles'] += 1
-                                processed_articles_set.add(article_idx)
-                                found_matching_entity = True
-                                break  # Found an entity, no need to check other entities in this sentence
-                    if found_matching_entity:
-                        break  # Found a matching entity in this article, move to next article
+                            matching_sentences.append(sentence.to_plain_string())
+                            break  # Prevent adding the same sentence multiple times
 
-            end_time = time.time()  # Store the end time
-            elapsed_time = end_time - start_time  # Calculate the elapsed time
+                if matching_sentences:
+                    filtered_articles_data[date]['articles'].append({
+                        'published_date': article['published_date'],
+                        'link': article['link'],
+                        'title': article['title'],  
+                        'tokenized_body': matching_sentences
+                    })
+                    filtered_articles_data[date]['number_of_articles'] += 1
+                    total_articles += 1
 
-            print(f"""\n--------------------------
-                {stock_symbol}: {article_num}
-                Processing for date {date}:
-                {filtered_articles_data[date]['number_of_articles']}/{len(articles)} articles kept
-                Took {elapsed_time:.2f} seconds.""")
-            
-            gc.collect()
+            # torch.cuda.empty_cache()  # Clear the CUDA cache
+            gc.collect()  # Force garbage collection
+            end_time = time.time()
+            elapsed_time = end_time - start_time
 
-        # Output the filtered articles to a JSON file
+            print(f"\n{stock_symbol}: Day {days_processed} processed in {elapsed_time:.2f} seconds. Kept {filtered_articles_data[date]['number_of_articles']}/{len(articles)}")
+
         output_data = {
-            'total_articles': sum(info['number_of_articles'] for date, info in filtered_articles_data.items()),
+            'total_articles': total_articles,
             'data': filtered_articles_data
         }
         output_path = os.path.join(filtered_dir, f'filtered_{stock_symbol}_articles.json')
@@ -119,24 +95,22 @@ def process_articles(stock_symbol, tokenized_articles, original_articles, entity
             json.dump(output_data, output_file, ensure_ascii=False, indent=4)
 
         print(f'Filtered articles for {stock_symbol} saved to {output_path}')
-        logging.info(f'Processing articles for {stock_symbol}')
+        logging.info(f'Filtered articles for {stock_symbol} written to {output_path}')
     except Exception as e:
         logging.exception(f"Exception occurred while processing articles for {stock_symbol}: {e}")
+
 
 def process_stock(stock_info_tuple):
     stock_symbol, stock_info = stock_info_tuple
     # Define the path to the tokenized and original articles JSON file
-    tokenized_articles_path = f'../StockData/tokenized_news_articles/tokenized_{stock_symbol}_articles.json'
-    original_articles_path = f'../StockData/formatted_news_articles/formatted_{stock_symbol}_articles.json'
+    tokenized_articles_path = f'G:/StockData/relevant_tokenized_news_articles/relevant_tokenized_{stock_symbol}_articles.json'
 
     # Load the tokenized and original articles
     with open(tokenized_articles_path, 'r', encoding='utf-8') as file:
         tokenized_articles = json.load(file)
-    with open(original_articles_path, 'r', encoding='utf-8') as file:
-        original_articles = json.load(file)
 
     # Process the articles
-    process_articles(stock_symbol, tokenized_articles, original_articles, stock_info['EntityNames'])
+    process_articles(stock_symbol, tokenized_articles, stock_info['EntityNames'])
 
 def main():
     # Sanity Check the device
@@ -148,7 +122,7 @@ def main():
     stock_info_list = [(symbol, info) for symbol, info in stocks.items()]
 
     # Use a pool of 3 processes, with the initializer to load the model
-    with Pool(processes=3, initializer=worker_initializer) as pool:
+    with Pool(processes=1, initializer=worker_initializer) as pool:
         pool.map(process_stock, stock_info_list)
 
 if __name__ == "__main__":
