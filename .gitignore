@@ -1,3 +1,4 @@
 /lib
 /archive
 /ignore
+/__pycache__

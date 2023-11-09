@@ -7,6 +7,10 @@ from fetch_closing_prices import fetch_closing_prices
 
 def fetch_stock_data(ticker, start_date, end_date):
     stock = yf.Ticker(ticker)
+
+    # Fetch shares outstanding
+    info = stock.info
+    shares_outstanding = info.get('sharesOutstanding')
     
     # Convert start_date and end_date to datetime objects
     start_date = datetime.strptime(start_date, '%Y-%m-%d')
@@ -29,7 +33,10 @@ def fetch_stock_data(ticker, start_date, end_date):
     data.ta.sma(length=20, column='Volume', append=True)  # Volume Moving Average
     
     # Drop Dividends and Stock Splits columns
-    data = data.drop(columns=['Dividends', 'Stock Splits'])
+    # data = data.drop(columns=['Dividends', 'Stock Splits'])
+
+    # Add shares outstanding to the DataFrame
+    data['Shares_Outstanding'] = shares_outstanding
     
     return data
 
