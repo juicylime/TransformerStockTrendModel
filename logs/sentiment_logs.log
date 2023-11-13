@@ -1,0 +1,74 @@
+2023-11-12 14:17:26,873 INFO:Processing articles for stock: LCID
+2023-11-12 14:17:26,937 INFO:Processing articles for stock: PLTR
+2023-11-12 14:17:26,993 INFO:Processing articles for stock: NVDA
+2023-11-12 14:20:20,819 INFO:Processing articles for stock: LCID
+2023-11-12 14:20:20,828 INFO:Processing articles for stock: PLTR
+2023-11-12 14:20:20,979 INFO:Processing articles for stock: NVDA
+2023-11-12 14:27:02,974 INFO:Processing complete for LCID. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_LCID.json'.
+2023-11-12 14:27:02,981 INFO:Processing articles for stock: TSLA
+2023-11-12 14:27:23,821 INFO:Processing complete for NVDA. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_NVDA.json'.
+2023-11-12 14:27:23,829 INFO:Processing articles for stock: AAL
+2023-11-12 14:30:19,767 INFO:Processing complete for PLTR. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_PLTR.json'.
+2023-11-12 14:30:19,777 INFO:Processing articles for stock: AAPL
+2023-11-12 14:31:23,303 INFO:Processing complete for AAL. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_AAL.json'.
+2023-11-12 14:31:23,316 INFO:Processing articles for stock: BAC
+2023-11-12 14:37:11,368 INFO:Processing complete for BAC. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_BAC.json'.
+2023-11-12 14:37:11,376 INFO:Processing articles for stock: AMZN
+2023-11-12 15:15:26,385 INFO:Processing articles for stock: LCID
+2023-11-12 15:15:26,406 INFO:Processing articles for stock: PLTR
+2023-11-12 15:15:26,450 INFO:Processing articles for stock: NVDA
+2023-11-12 15:17:31,075 INFO:Processing articles for stock: LCID
+2023-11-12 15:17:31,222 INFO:Processing articles for stock: NVDA
+2023-11-12 15:24:54,490 INFO:Processing complete for LCID. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_LCID.json'.
+2023-11-12 15:24:54,500 INFO:Processing articles for stock: TSLA
+2023-11-12 15:25:11,342 INFO:Processing complete for NVDA. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_NVDA.json'.
+2023-11-12 15:25:11,352 INFO:Processing articles for stock: AAL
+2023-11-12 15:28:14,571 INFO:Processing complete for PLTR. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_PLTR.json'.
+2023-11-12 15:28:14,581 INFO:Processing articles for stock: AAPL
+2023-11-12 15:29:14,411 INFO:Processing complete for AAL. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_AAL.json'.
+2023-11-12 15:29:14,419 INFO:Processing articles for stock: BAC
+2023-11-12 15:35:19,958 INFO:Processing complete for BAC. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_BAC.json'.
+2023-11-12 15:35:19,969 INFO:Processing articles for stock: AMZN
+2023-11-12 15:43:11,361 INFO:Processing complete for AAPL. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_AAPL.json'.
+2023-11-12 15:43:11,381 INFO:Processing articles for stock: AMD
+2023-11-12 15:47:04,145 INFO:Processing complete for TSLA. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_TSLA.json'.
+2023-11-12 15:47:04,166 INFO:Processing articles for stock: GOOG
+2023-11-12 15:47:28,538 INFO:Processing complete for AMZN. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_AMZN.json'.
+2023-11-12 15:47:28,551 INFO:Processing articles for stock: BBD
+2023-11-12 15:50:00,303 INFO:Processing complete for GOOG. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_GOOG.json'.
+2023-11-12 15:50:00,314 INFO:Processing articles for stock: BCS
+2023-11-12 15:51:09,125 INFO:Processing complete for BCS. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_BCS.json'.
+2023-11-12 15:51:09,130 INFO:Processing articles for stock: INTC
+2023-11-12 15:53:26,228 INFO:Processing complete for AMD. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_AMD.json'.
+2023-11-12 15:53:26,242 INFO:Processing articles for stock: VALE
+2023-11-12 15:56:31,022 INFO:Processing complete for VALE. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_VALE.json'.
+2023-11-12 15:56:31,030 INFO:Processing articles for stock: VZ
+2023-11-12 15:57:06,459 INFO:Processing complete for BBD. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_BBD.json'.
+2023-11-12 15:57:06,467 INFO:Processing articles for stock: UBER
+2023-11-12 15:59:14,082 INFO:Processing complete for INTC. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_INTC.json'.
+2023-11-12 15:59:14,092 INFO:Processing articles for stock: META
+2023-11-12 16:07:04,768 INFO:Processing complete for VZ. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_VZ.json'.
+2023-11-12 16:07:04,780 INFO:Processing articles for stock: SRC
+2023-11-12 16:08:48,404 INFO:Processing complete for SRC. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_SRC.json'.
+2023-11-12 16:08:48,411 INFO:Processing articles for stock: CCL
+2023-11-12 16:09:31,856 INFO:Processing complete for META. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_META.json'.
+2023-11-12 16:09:31,873 INFO:Processing articles for stock: ITUB
+2023-11-12 16:10:21,821 INFO:Processing complete for UBER. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_UBER.json'.
+2023-11-12 16:10:21,839 INFO:Processing articles for stock: WDC
+2023-11-12 16:12:42,960 INFO:Processing complete for ITUB. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_ITUB.json'.
+2023-11-12 16:12:42,967 INFO:Processing articles for stock: MSFT
+2023-11-12 16:16:41,810 INFO:Processing complete for CCL. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_CCL.json'.
+2023-11-12 16:16:41,819 INFO:Processing articles for stock: BMY
+2023-11-12 16:17:10,793 INFO:Processing complete for WDC. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_WDC.json'.
+2023-11-12 16:17:10,808 INFO:Processing articles for stock: AGNC
+2023-11-12 16:19:40,506 INFO:Processing complete for BMY. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_BMY.json'.
+2023-11-12 16:19:40,513 INFO:Processing articles for stock: PFE
+2023-11-12 16:27:32,821 INFO:Processing complete for AGNC. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_AGNC.json'.
+2023-11-12 16:27:32,836 INFO:Processing articles for stock: NOK
+2023-11-12 16:28:40,887 INFO:Processing complete for PFE. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_PFE.json'.
+2023-11-12 16:28:40,900 INFO:Processing articles for stock: PBR
+2023-11-12 16:30:07,340 INFO:Processing complete for NOK. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_NOK.json'.
+2023-11-12 16:32:20,718 INFO:Processing complete for PBR. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_PBR.json'.
+2023-11-12 16:33:40,641 INFO:Processing complete for MSFT. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_MSFT.json'.
+2023-11-12 16:33:40,655 INFO:Processing articles for stock: XOM
+2023-11-12 16:38:27,372 INFO:Processing complete for XOM. Sentiment scores saved to '../StockData/sentiment_scores/sentiment_output_XOM.json'.
