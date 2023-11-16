@@ -2,8 +2,6 @@ import requests
 import json
 from time import sleep
 
-#Ran out of api calls. Pick it up on Sunday or something.
-
 def fetch_earnings_data(symbol):
     url = f"https://www.alphavantage.co/query?function=EARNINGS&symbol={symbol}&apikey=F2A0OP5KPI7BSBL8"
     response = requests.get(url)
@@ -25,7 +23,7 @@ def main():
         earnings_data = fetch_earnings_data(stock)
         if earnings_data is not None:
             all_earnings_data.update(earnings_data)
-        sleep(5)  # Sleep for 12 seconds to avoid hitting rate limits
+        sleep(5)  # Sleep for 5 seconds to avoid hitting rate limits
 
     with open('earnings_data_1.json', 'w') as f:
         json.dump(all_earnings_data, f, indent=4)

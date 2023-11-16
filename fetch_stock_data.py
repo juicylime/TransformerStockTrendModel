@@ -7,17 +7,13 @@ from fetch_closing_prices import fetch_closing_prices
 
 def fetch_stock_data(ticker, start_date, end_date):
     stock = yf.Ticker(ticker)
-
-    # Fetch shares outstanding
-    info = stock.info
-    shares_outstanding = info.get('sharesOutstanding')
     
     # Convert start_date and end_date to datetime objects
     start_date = datetime.strptime(start_date, '%Y-%m-%d')
     end_date = datetime.strptime(end_date, '%Y-%m-%d')
     
-    # Create a buffer by subtracting 100 days from the start date
-    buffer_date = start_date - timedelta(days=150)
+    # Create a buffer by subtracting 150 days from the start date
+    buffer_date = start_date - timedelta(days=370)
     
     # Convert buffer_date back to string format
     buffer_date_str = buffer_date.strftime('%Y-%m-%d')
@@ -25,19 +21,34 @@ def fetch_stock_data(ticker, start_date, end_date):
     data = stock.history(start=buffer_date_str, end=end_date.strftime('%Y-%m-%d'))
     
     # Calculating technical indicators using pandas_ta
-    data.ta.sma(length=14, append=True)  # Simple Moving Average
-    data.ta.sma(length=50, append=True)  # Long Moving Average
+    data.ta.ema(length=10, append=True)  # Short-term EMA
+    data.ta.ema(length=30, append=True)
     data.ta.macd(append=True)  # MACD
     data.ta.rsi(append=True)  # RSI
     data.ta.bbands(append=True)  # Bollinger Bands
-    data.ta.sma(length=20, column='Volume', append=True)  # Volume Moving Average
-    
-    # Drop Dividends and Stock Splits columns
-    # data = data.drop(columns=['Dividends', 'Stock Splits'])
+    data.ta.sma(length=20, column='Volume', append=True)
+    data.rename(columns={'SMA_20': 'avgTradingVolume'}, inplace=True)
 
-    # Add shares outstanding to the DataFrame
-    data['Shares_Outstanding'] = shares_outstanding
-    
+    # Adding Stochastic Oscillator
+    data.ta.stoch(high='High', low='Low', close='Close', k=14, d=3, append=True)
+
+    # Adding Parabolic SAR
+    data.ta.psar(high='High', low='Low', close='Close', append=True)
+
+    # Combine the two PSAR columns into one, filling NaN values from one column with values from the other
+    # Downward trends (PSARs) are multiplied by -1 to make them negative
+    data['PSAR_combined'] = data['PSARl_0.02_0.2'].fillna(-data['PSARs_0.02_0.2'])
+
+    # Drop the individual PSARl and PSARs columns
+    data.drop(columns=['PSARl_0.02_0.2', 'PSARs_0.02_0.2', 'PSARaf_0.02_0.2', 'PSARr_0.02_0.2'], inplace=True)
+
+    # Calculate 52-week high and low
+    data['52_week_high'] = data['Close'].rolling(window=252).max()
+    data['52_week_low'] = data['Close'].rolling(window=252).min()
+
+    # Drop 'Dividends' and 'Stock_Splits' columns
+    data.drop(columns=['Dividends', 'Stock Splits'], inplace=True)
+
     return data
 
 def fetch_market_indices(start_date, end_date):
@@ -58,13 +69,13 @@ def fetch_market_indices(start_date, end_date):
     sp500_data = sp500.history(start=buffer_date_str, end=end_date)[['Close']]
     
     # Calculate SMA and LMA for market indices
-    nasdaq_data.ta.sma(length=14, append=True)
-    nasdaq_data.ta.sma(length=50, append=True)
-    sp500_data.ta.sma(length=14, append=True)
-    sp500_data.ta.sma(length=50, append=True)
+    nasdaq_data.ta.ema(length=10, append=True)
+    nasdaq_data.ta.ema(length=30, append=True)
+    sp500_data.ta.ema(length=10, append=True)
+    sp500_data.ta.ema(length=30, append=True)
     
-    nasdaq_data.rename(columns={'Close': 'NASDAQ_Close', 'SMA_14': 'NASDAQ_SMA_14', 'SMA_50': 'NASDAQ_SMA_50'}, inplace=True)
-    sp500_data.rename(columns={'Close': 'SP500_Close', 'SMA_14': 'SP500_SMA_14', 'SMA_50': 'SP500_SMA_50'}, inplace=True)
+    nasdaq_data.rename(columns={'Close': 'NASDAQ_Close', 'EMA_10': 'NASDAQ_EMA_10', 'EMA_30': 'NASDAQ_EMA_30'}, inplace=True)
+    sp500_data.rename(columns={'Close': 'SP500_Close', 'EMA_10': 'SP500_EMA_10', 'EMA_30': 'SP500_EMA_30'}, inplace=True)
     
     return nasdaq_data, sp500_data
 
