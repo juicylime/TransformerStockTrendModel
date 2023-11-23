@@ -42,6 +42,13 @@ def calculate_percentage_change(current, previous):
     return ((current - previous) / previous) * 100
 
 
+def get_day_of_week(epoch):
+    # Convert the epoch to a datetime object
+    date = datetime.utcfromtimestamp(epoch)
+    # Get the day of the week as a number
+    return date.weekday()
+
+
 def format_data(input_file, output_file, percentage_change_file, combined_file):
     with open(input_file, 'r') as file:
         data = json.load(file)
@@ -114,10 +121,28 @@ def format_data(input_file, output_file, percentage_change_file, combined_file):
         "FEDFUNDS_value",
         "FEDFUNDS_percent_change",
         "FEDFUNDS_yearly_percent_change",
-        "article_count"
+        "article_count",
+        "52_week_high",
+        "52_week_low",
+        "EMA_10",
+        "MACD_12_26_9",
+        "MACDh_12_26_9",
+        "MACDs_12_26_9",
+        "RSI_14",
+        "BBL_5_2.0",
+        "BBM_5_2.0",
+        "BBU_5_2.0",
+        "BBB_5_2.0",
+        "BBP_5_2.0",
+        "STOCHk_14_3_3",
+        "STOCHd_14_3_3",
+        "PSAR_combined",
+        "NASDAQ_EMA_10",
+        "average_sentiment_score"
     ]
 
     fields_to_skip_all = [
+        # Unneccessary features
         "depreciationDepletionAndAmortization",
         "incomeBeforeTax",
         "netIncomeFromContinuingOperations",
@@ -159,6 +184,7 @@ def format_data(input_file, output_file, percentage_change_file, combined_file):
         "proceedsFromIssuanceOfCommonStock",
         "proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet",
         "proceedsFromIssuanceOfPreferredStock",
+        "proceedsFromRepurchaseOfEquity",
         "totalAssets",
         "totalCurrentAssets",
         "totalNonCurrentAssets",
@@ -178,7 +204,116 @@ def format_data(input_file, output_file, percentage_change_file, combined_file):
         "proceedsFromSaleOfTreasuryStock",
         "changeInExchangeRate",
         "paymentsForOperatingActivities",
-        "paymentsForRepurchaseOfPreferredStock"
+        "paymentsForRepurchaseOfPreferredStock",
+        "inventory",
+
+        # Testing different feature sets
+        # "EMA_30",
+        # "NASDAQ_EMA_30",
+        # "SP500_Close",
+        # "SP500_EMA_10",
+        # "SP500_EMA_30",
+        # "surprisePercentage",
+        # "grossProfit",
+        # "totalRevenue",
+        # "costOfRevenue",
+        # "operatingIncome",
+        # "ebitda",
+        # "netIncome",
+        # "operatingCashflow",
+        # "profitLoss",
+        # "cashflowFromInvestment",
+        # "cashflowFromFinancing",
+        # "changeInCashAndCashEquivalents",
+        # "cashAndCashEquivalentsAtCarryingValue",
+        # "cashAndShortTermInvestments",
+        # "currentNetReceivables",
+        # "propertyPlantEquipment",
+        # "longTermInvestments",
+        # "shortTermInvestments",
+        # "totalLiabilities",
+        # "totalCurrentLiabilities",
+        # "totalNonCurrentLiabilities",
+        # "longTermDebt",
+        # "currentLongTermDebt",
+        # "shortLongTermDebtTotal",
+        # "commonStockSharesOutstanding",
+        # "MCHI_Closing_Price",
+        # "VGK_Closing_Price",
+        # "EWJ_Closing_Price",
+        # "VWO_Closing_Price",
+        # "VXUS_Closing_Price",
+        # "VT_Closing_Price",
+        # "XLY_Closing_Price",
+        # "XLP_Closing_Price",
+        # "XLE_Closing_Price",
+        # "XLF_Closing_Price",
+        # "XLV_Closing_Price",
+        # "XLI_Closing_Price",
+        # "XLB_Closing_Price",
+        # "XLRE_Closing_Price",
+        # "XLK_Closing_Price",
+        # "XLU_Closing_Price",
+        # "XLC_Closing_Price",
+        # "GDP_value",
+        # "GDP_percent_change",
+        # "GDP_yearly_percent_change",
+        # "GDP_next_release_date",
+        # "CPIAUCSL_value",
+        # "CPIAUCSL_percent_change",
+        # "CPIAUCSL_yearly_percent_change",
+        # "CPIAUCSL_next_release_date",
+        # "UNRATE_value",
+        # "UNRATE_percent_change",
+        # "UNRATE_yearly_percent_change",
+        # "UNRATE_next_release_date",
+        # "FEDFUNDS_value",
+        # "FEDFUNDS_percent_change",
+        # "FEDFUNDS_yearly_percent_change",
+        # "FEDFUNDS_next_release_date",
+        # "DGS10_value",
+        # "DGS10_percent_change",
+        # "DGS10_yearly_percent_change",
+        # "DGS10_next_release_date",
+        # "CONSUMER_value",
+        # "CONSUMER_percent_change",
+        # "CONSUMER_yearly_percent_change",
+        # "CONSUMER_next_release_date",
+        # "INDPRO_value",
+        # "INDPRO_percent_change",
+        # "INDPRO_yearly_percent_change",
+        # "INDPRO_next_release_date",
+        # "RSAFS_value",
+        # "RSAFS_percent_change",
+        # "RSAFS_yearly_percent_change",
+        # "RSAFS_next_release_date",
+        # "USEPUINDXD_value",
+        # "USEPUINDXD_percent_change",
+        # "USEPUINDXD_yearly_percent_change",
+        # "USEPUINDXD_next_release_date",
+        # "article_count",
+        # "fiscalDateEnding",
+        # "reportedDate",
+        # "reportedEPS",
+        # "estimatedEPS",
+        # "surprise",
+        # "nextEarningsReportDate",
+        # "nextEstimatedEPS",
+        # "BBL_5_2.0",
+        # "BBM_5_2.0",
+        # "BBU_5_2.0",
+        # "BBB_5_2.0",
+        # "BBP_5_2.0",
+        # "avgTradingVolume",
+        # "STOCHk_14_3_3",
+        # "STOCHd_14_3_3",
+        # "PSAR_combined",
+        # "52_week_high",
+        # "52_week_low",
+        # "NASDAQ_Close",
+        # "NASDAQ_EMA_10",
+        # "MACDh_12_26_9",
+        # "MACDs_12_26_9"
     ]
 
     dates_to_convert = [
@@ -192,7 +327,7 @@ def format_data(input_file, output_file, percentage_change_file, combined_file):
         "RSAFS_next_release_date",
         "USEPUINDXD_next_release_date",
         "fiscalDateEnding",
-        "reportedDate",
+        "EarningsReportDate",
         "nextEarningsReportDate"
     ]
 
@@ -204,9 +339,10 @@ def format_data(input_file, output_file, percentage_change_file, combined_file):
 
         for date, metrics in dates.items():
             epoch_time = convert_to_epoch(date)
-            formatted_metrics = {}
-            percentage_metrics = {}
-            combined_metrics = {}
+            week_day = get_day_of_week(epoch_time)
+            formatted_metrics = {'week_day': week_day}
+            percentage_metrics = {'week_day': week_day}
+            combined_metrics = {'week_day': week_day}
 
             for key, value in metrics.items():
                 if key in fields_to_skip_all:
@@ -221,6 +357,8 @@ def format_data(input_file, output_file, percentage_change_file, combined_file):
                     percentage_metrics[key] = days_diff
                     combined_metrics[key] = days_diff
                 elif isinstance(value, str) and not is_convertible_to_number(value):
+                    continue
+                elif value is None:
                     continue
                 elif isinstance(value, str):
                     converted_value = convert_field(value)

@@ -22,25 +22,29 @@ balance_sheet_data = load_json('balance_sheet_data/balance_sheet.json')
 
 # Function to get the next earnings report date and estimated EPS
 def get_next_earnings_info(current_date, earnings_info):
-    future_earnings = [(datetime.strptime(entry['fiscalDateEnding'], '%Y-%m-%d').date(), entry)
-                       for entry in earnings_info if datetime.strptime(entry['fiscalDateEnding'], '%Y-%m-%d').date() > current_date]
+    future_earnings = [(datetime.strptime(entry['reportedDate'], '%Y-%m-%d').date(), entry)
+                       for entry in earnings_info if datetime.strptime(entry['reportedDate'], '%Y-%m-%d').date() > current_date]
     future_earnings.sort(key=lambda x: x[0])
     return future_earnings[0] if future_earnings else (None, None)
 
+# Function to get the previous earnings report date and estimated EPS
+def get_previous_earnings_info(current_date, earnings_info):
+    past_earnings = [(datetime.strptime(entry['reportedDate'], '%Y-%m-%d').date(), entry)
+                     for entry in earnings_info if datetime.strptime(entry['reportedDate'], '%Y-%m-%d').date() < current_date]
+    past_earnings.sort(key=lambda x: x[0], reverse=True)
+    return past_earnings[0] if past_earnings else (None, None)
+
 # Function to match financial reports based on fiscalDateEnding
-def match_financial_reports(earnings, income_statements, cash_flows, balance_sheets):
-    earnings_dict = {entry['fiscalDateEnding']: entry for entry in earnings}
+def match_financial_reports(income_statements, cash_flows, balance_sheets):
     income_dict = {entry['fiscalDateEnding']: entry for entry in income_statements}
     cash_flow_dict = {entry['fiscalDateEnding']: entry for entry in cash_flows}
     balance_sheet_dict = {entry['fiscalDateEnding']: entry for entry in balance_sheets}
     
     combined_reports = {}
-    for date, earnings_entry in earnings_dict.items():
+    for date, income_entry in income_dict.items():
         combined_entry = {}
-        combined_entry.update(earnings_entry)
+        combined_entry.update(income_entry)
         
-        if date in income_dict:
-            combined_entry.update(income_dict[date])
         if date in cash_flow_dict:
             combined_entry.update(cash_flow_dict[date])
         if date in balance_sheet_dict:
@@ -52,7 +56,6 @@ def match_financial_reports(earnings, income_statements, cash_flows, balance_she
 # Index and match financial data by company
 indexed_financials = {
     company: match_financial_reports(
-        earnings_data.get(company, []),
         income_statement_data.get(company, []),
         cash_flow_data.get(company, []),
         balance_sheet_data.get(company, [])
@@ -62,7 +65,7 @@ indexed_financials = {
 
 # Sort earnings dates for each company to facilitate finding the next earnings date
 sorted_earnings_dates = {
-    company: sorted([datetime.strptime(report['fiscalDateEnding'], '%Y-%m-%d').date() for report in reports])
+    company: sorted([datetime.strptime(report['reportedDate'], '%Y-%m-%d').date() for report in reports])
     for company, reports in earnings_data.items()
 }
 
@@ -86,7 +89,7 @@ def add_sentiment_score(date, company_data, sentiment_data):
         company_data['article_count'] = None
     return company_data
 
-start_date = datetime.strptime('2018-12-31', '%Y-%m-%d').date()
+start_date = datetime.strptime('2014-01-01', '%Y-%m-%d').date()
 
 combined_stock_data = {}
 for company, dates in stock_data.items():
@@ -141,29 +144,17 @@ for company, dates in stock_data.items():
             if estimated_eps:
                 combined_stock_data[company][date]['nextEstimatedEPS'] = estimated_eps
 
+        previous_earnings_date, previous_earnings_info = get_previous_earnings_info(current_date_obj, earnings_info)
+        if previous_earnings_date:
+            combined_stock_data[company][date]['EarningsReportDate'] = previous_earnings_date.strftime('%Y-%m-%d')
+            combined_stock_data[company][date]['reportedEPS'] = previous_earnings_info.get('reportedEPS')
+            combined_stock_data[company][date]['estiamtedEPS'] = previous_earnings_info.get('estimatedEPS')
+            combined_stock_data[company][date]['surprise'] = previous_earnings_info.get('surprise')
+            combined_stock_data[company][date]['surprisePercentage'] = previous_earnings_info.get('surprisePercentage')
 
-# for company, dates in combined_stock_data.items():
-#     print(f"Processing economic data for {company}")
-#     for date, record in dates.items():
-#         current_date_obj = datetime.strptime(date, '%Y-%m-%d').date()
-        
-#         # Merge economic indicators
-#         for indicator_name, indicator_records in economic_indicators.items():
-#             # Find the most recent indicator value before the current date
-#             recent_indicator = next((ind for ind in reversed(indicator_records) 
-#                                     if datetime.strptime(ind['release_date'], '%Y-%m-%d').date() <= current_date_obj), None)
-#             if recent_indicator:
-#                 record.update({
-#                     f'{indicator_name}_value': recent_indicator.get('value'),
-#                     f'{indicator_name}_percent_change': recent_indicator.get('percent_change'),
-#                     f'{indicator_name}_yearly_percent_change': recent_indicator.get('yearly_percent_change')
-#                 })
-#             # Find the next indicator release date after the current date
-#             next_indicator = next((ind for ind in indicator_records
-#                                   if datetime.strptime(ind['release_date'], '%Y-%m-%d').date() > current_date_obj), None)
-#             if next_indicator:
-#                 record[f'{indicator_name}_next_release_date'] = next_indicator['release_date']
 
+
+# Skipping for now since we arent including the econimic indicators
 
 for company, dates in combined_stock_data.items():
     print(f"Processing economic data for {company}")
