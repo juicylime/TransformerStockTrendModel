@@ -6,14 +6,14 @@ import sys
 def _float_feature(value):
     """Returns a float_list from a float / double."""
     if value is None:
-        return tf.train.Feature(float_list=tf.train.FloatList(value=[2.0]))
+        return tf.train.Feature(float_list=tf.train.FloatList(value=[-2.0]))
     else:
         return tf.train.Feature(float_list=tf.train.FloatList(value=[float(value)]))
 
 def _int_feature(value):
     """Returns an int64_list from a bool / enum / int / uint."""
     if value is None:
-        return tf.train.Feature(int64_list=tf.train.Int64List(value=[2]))
+        return tf.train.Feature(int64_list=tf.train.Int64List(value=[-2]))
     else:
         return tf.train.Feature(int64_list=tf.train.Int64List(value=[int(value)]))
 
@@ -64,7 +64,7 @@ def count_records_in_tfrecord(tfrecord_file):
     return count
 
 def main():
-    split = 'training'
+    split = 'validation'
     input_directory = f'G:/StockData/{split}_sequence_20_split_85'
     convert_examples_to_tf_records(input_directory, split)
 

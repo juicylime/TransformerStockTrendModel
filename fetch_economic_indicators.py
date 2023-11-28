@@ -18,7 +18,7 @@ def get_economic_data(api_key, series_id, start_date):
     return response.json()
 
 api_key = '6dbcb67e7161b35809a7e0e4e0d7e08c'  
-start_date = '2017-01-01'
+start_date = '2014-01-01'
 
 series_ids = [
     'GDP', 'CPIAUCSL', 'UNRATE', 'FEDFUNDS', 'DGS10', 'CONSUMER', 'INDPRO', 'RSAFS', 'USEPUINDXD'

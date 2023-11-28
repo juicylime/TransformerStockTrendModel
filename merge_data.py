@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 # Clean this cluster fuck up at some point.
+# Refactor this with pandas when you have time.
 
 # Function to load JSON data
 def load_json(filename):
@@ -111,8 +112,8 @@ for company, dates in stock_data.items():
         date_obj = datetime.strptime(date, '%Y-%m-%d').date()
 
         # Skip dates before the earliest date to process
-        if date_obj < earliest_date_to_process:
-            continue
+        # if date_obj < earliest_date_to_process:
+        #     continue
 
         combined_stock_data[company][date] = dates[date]
         combined_stock_data[company][date] = add_sentiment_score(date, combined_stock_data[company][date], sentiment_data)
