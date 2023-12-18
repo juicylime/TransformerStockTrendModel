@@ -1,4 +1,8 @@
 /lib
+/chromedriver-win64
 /archive
 /ignore
+/__pycache__
+/additional_features
+/logs
 /__pycache__

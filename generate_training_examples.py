@@ -12,7 +12,7 @@ def calculate_correlation(stocks_data, base_prices):
             # print(f"Calculated correlation for {stock}")
     return correlations
 
-def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=100):
+def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1000):
     with open(input_file, 'r') as file:
         data = json.load(file)
 
@@ -22,7 +22,7 @@ def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1
     }
 
     for stock_symbol, dates in data.items():
-        dates_window = deque(maxlen=n + 1)
+        dates_window = deque(maxlen=n + 10)
         stocks_window = {stock: deque(maxlen=n) for stock in stocks_data}
         sorted_dates = sorted(dates.keys())
         
@@ -51,32 +51,33 @@ def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1
                         else:
                             prices_deque.append(None)
 
-                if len(dates_window) == n + 1:
+                if len(dates_window) == n + 10: # number of days in future to predict
                     # Ensure we have all the necessary prices to calculate correlations
                     if all(len(prices_deque) == n for prices_deque in stocks_window.values()):
                         # Prepare data for correlation calculation
                         base_prices = [entry['Close'] for entry in list(dates_window)[:-1] if 'Close' in entry]
-                        correlations = calculate_correlation({k: list(v) for k, v in stocks_window.items() if k != stock_symbol}, base_prices)
+                        # correlations = calculate_correlation({k: list(v) for k, v in stocks_window.items() if k != stock_symbol}, base_prices)
 
                         # Find the most correlated stocks and their data
-                        if correlations:
-                            max_positive_stock, max_negative_stock = max(correlations, key=correlations.get), min(correlations, key=correlations.get)
+                        # if correlations:
+                        #     max_positive_stock, max_negative_stock = max(correlations, key=correlations.get), min(correlations, key=correlations.get)
+                        if True:
                             
                             # Prepare X values with additional correlation data and related stocks' closing prices
                             X = [
                                 {**entry,
-                                'correlation_with_max_positive': correlations[max_positive_stock],
-                                'max_positive_stock_close': stocks_data[max_positive_stock][idx],
-                                'correlation_with_max_negative': correlations[max_negative_stock],
-                                'max_negative_stock_close': stocks_data[max_negative_stock][idx]
+                                # 'correlation_with_max_positive': correlations[max_positive_stock],
+                                # 'max_positive_stock_close': stocks_data[max_positive_stock][idx],
+                                # 'correlation_with_max_negative': correlations[max_negative_stock],
+                                # 'max_negative_stock_close': stocks_data[max_negative_stock][idx]
                                 }
-                                for idx, entry in enumerate(list(dates_window)[:-1])
+                                for idx, entry in enumerate(list(dates_window)[:-10])
                             ]
                             
                             # Prepare Y value
                             # Y = 1 if dates_window[-1]['Close'] > 0 else 0
 
-                            Y = dates_window[-1]['Open']
+                            Y = dates_window[-1]['SMA_40']
 
                             
                             # Y is determined if the percentage change is + or -. + means stock went up. 
@@ -115,5 +116,5 @@ def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1
 
 
 # Example usage
-input_file = 'G:/StockData/normalized_master_datasets/stock_dataset_absolute_values_normalized.json'
-create_training_examples(input_file, split_percentage=85, n=20)
+input_file = 'G:/StockData/normalized_master_datasets/abs_normalized.json'
+create_training_examples(input_file, split_percentage=85, n=30)

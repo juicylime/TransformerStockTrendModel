@@ -3,7 +3,6 @@ import json
 import pandas_ta as ta
 from datetime import datetime, timedelta
 import pytz
-from fetch_closing_prices import fetch_closing_prices
 
 def fetch_stock_data(ticker, start_date, end_date):
     stock = yf.Ticker(ticker)
@@ -20,14 +19,22 @@ def fetch_stock_data(ticker, start_date, end_date):
     
     data = stock.history(start=buffer_date_str, end=end_date.strftime('%Y-%m-%d'))
     
+    # The date should be a int between 1 and 5 representing weekdays
+    # 1 = Monday, 5 = Friday
+    data['Date'] = data.index.dayofweek + 1
+    
     # Calculating technical indicators using pandas_ta
+    data.ta.sma(length=10, column='Volume', append=True)
+    data.rename(columns={'SMA_10': 'avgTradingVolume'}, inplace=True)
+    data.ta.sma(length=30, append=True)
+    data.ta.sma(length=40, append=True)
     data.ta.ema(length=10, append=True)  # Short-term EMA
     data.ta.ema(length=30, append=True)
     data.ta.macd(append=True)  # MACD
     data.ta.rsi(length=10, append=True)  # RSI
     data.ta.bbands(append=True)  # Bollinger Bands
-    data.ta.sma(length=20, column='Volume', append=True)
-    data.rename(columns={'SMA_20': 'avgTradingVolume'}, inplace=True)
+    data.ta.adx(length=14, append=True)
+    data.ta.ichimoku(append=True)
 
     # Adding Stochastic Oscillator
     data.ta.stoch(high='High', low='Low', close='Close', k=14, d=3, append=True)
@@ -36,11 +43,10 @@ def fetch_stock_data(ticker, start_date, end_date):
     data.ta.psar(high='High', low='Low', close='Close', append=True)
 
     # Combine the two PSAR columns into one, filling NaN values from one column with values from the other
-    # Downward trends (PSARs) are multiplied by -1 to make them negative
-    data['PSAR_combined'] = data['PSARl_0.02_0.2'].fillna(-data['PSARs_0.02_0.2'])
+    data['PSAR_combined'] = data['PSARl_0.02_0.2'].fillna(data['PSARs_0.02_0.2'])
 
     # Drop the individual PSARl and PSARs columns
-    data.drop(columns=['PSARl_0.02_0.2', 'PSARs_0.02_0.2', 'PSARaf_0.02_0.2', 'PSARr_0.02_0.2'], inplace=True)
+    data.drop(columns=['PSARl_0.02_0.2', 'PSARs_0.02_0.2', 'PSARaf_0.02_0.2', 'PSARr_0.02_0.2', 'ICS_26'], inplace=True)
 
     # Calculate 52-week high and low
     data['52_week_high'] = data['Close'].rolling(window=252).max()
@@ -81,7 +87,7 @@ def fetch_market_indices(start_date, end_date):
 
 def main():
     # Load the list of stocks from stock_list.json
-    with open('stock_list.json', 'r') as file:
+    with open('./stock_list.json', 'r') as file:
         stock_list = json.load(file)
 
     # Extract the stock tickers from the dictionary
@@ -98,43 +104,35 @@ def main():
         stock = stock.strip()
         print(f"Fetching data for {stock}...")
         stock_data = fetch_stock_data(stock, start_date, end_date)
-        
+
         # Merge market indices data with stock data
         stock_data = stock_data.merge(nasdaq_data, left_index=True, right_index=True)
         stock_data = stock_data.merge(sp500_data, left_index=True, right_index=True)
-        
+
         # Convert start_date to a timezone-aware datetime object
         start_date_obj = datetime.strptime(start_date, '%Y-%m-%d').replace(tzinfo=pytz.UTC)
 
         # Trim data to original date range
         stock_data_trimmed = stock_data[start_date_obj:]
-        
-        # Check for any NaN values in the trimmed stock_data DataFrame
-        if stock_data_trimmed.isna().any().any():
-            print(f"Skipping {stock} due to NaN values.")
+
+        # Remove rows where any column has NaN values
+        stock_data_trimmed = stock_data_trimmed.dropna(how='any')
+
+        # Check if DataFrame is empty after removing NaN values
+        if stock_data_trimmed.empty:
+            print(f"Skipping {stock} due to insufficient data after removing NaN values.")
             continue
-        
-        # Trim data to original date range
-        stock_data = stock_data[start_date_obj:]
 
         # Convert Timestamp objects to strings
-        stock_data.index = stock_data.index.strftime('%Y-%m-%d')
+        stock_data_trimmed.index = stock_data_trimmed.index.strftime('%Y-%m-%d')
 
-        all_data[stock] = stock_data.to_dict(orient='index')
+        all_data[stock] = stock_data_trimmed.to_dict(orient='index')
     
     # Saving data to JSON
     with open('G:/StockData/stock_data.json', 'w') as f:
         json.dump(all_data, f, indent=4)
     
     print("Data saved to stock_data.json")
-
-    # List of SPDR sector fund tickers
-    spdr_tickers = ["XLY", "XLP", "XLE", "XLF", "XLV", "XLI", "XLB", "XLRE", "XLK", "XLU", "XLC"]
-    fetch_closing_prices(spdr_tickers, start_date, end_date, "G:/StockData/market_data/spdr_closing_prices.json")
-
-    # List of ETF tickers to track major markets
-    etf_tickers = ["MCHI", "VGK", "EWJ", "VWO", "VXUS", "VT"]
-    fetch_closing_prices(etf_tickers, start_date, end_date, "G:/StockData/market_data/etf_closing_prices.json")
 
 if __name__ == "__main__":
     main()
