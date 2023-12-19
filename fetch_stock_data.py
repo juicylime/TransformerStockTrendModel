@@ -3,6 +3,7 @@ import json
 import pandas_ta as ta
 from datetime import datetime, timedelta
 import pytz
+from datetime import date
 
 def fetch_stock_data(ticker, start_date, end_date):
     stock = yf.Ticker(ticker)
@@ -21,7 +22,7 @@ def fetch_stock_data(ticker, start_date, end_date):
     
     # The date should be a int between 1 and 5 representing weekdays
     # 1 = Monday, 5 = Friday
-    data['Date'] = data.index.dayofweek + 1
+    data['week_day'] = data.index.dayofweek + 1
     
     # Calculating technical indicators using pandas_ta
     data.ta.sma(length=10, column='Volume', append=True)
@@ -85,17 +86,10 @@ def fetch_market_indices(start_date, end_date):
     
     return nasdaq_data, sp500_data
 
-def main():
-    # Load the list of stocks from stock_list.json
-    with open('./stock_list.json', 'r') as file:
-        stock_list = json.load(file)
 
+def get_stock_data(start_date, end_date, stock_list):
     # Extract the stock tickers from the dictionary
     stocks = list(stock_list.keys())
-
-    # Prompt user for input
-    start_date = input("Enter start date (YYYY-MM-DD): ")
-    end_date = input("Enter end date (YYYY-MM-DD): ")
     
     all_data = {}
     nasdaq_data, sp500_data = fetch_market_indices(start_date, end_date)
@@ -128,6 +122,20 @@ def main():
 
         all_data[stock] = stock_data_trimmed.to_dict(orient='index')
     
+    return all_data
+   
+
+def main():
+    # Load the list of stocks from stock_list.json
+    with open('stock_list.json', 'r') as file:
+        stock_list = json.load(file)
+    
+    # Prompt user for input
+    start_date = input("Enter start date (YYYY-MM-DD): ")
+    end_date = input("Enter end date (YYYY-MM-DD): ")
+    
+    all_data = get_stock_data(start_date, end_date, stock_list)
+
     # Saving data to JSON
     with open('G:/StockData/stock_data.json', 'w') as f:
         json.dump(all_data, f, indent=4)

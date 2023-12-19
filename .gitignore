@@ -6,3 +6,5 @@
 /additional_features
 /logs
 /__pycache__
+/historical_intraday_market_data
+/model_weights
