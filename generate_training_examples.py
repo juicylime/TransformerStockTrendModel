@@ -55,7 +55,7 @@ def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1
                     # Ensure we have all the necessary prices to calculate correlations
                     if all(len(prices_deque) == n for prices_deque in stocks_window.values()):
                         # Prepare data for correlation calculation
-                        base_prices = [entry['Close'] for entry in list(dates_window)[:-1] if 'Close' in entry]
+                        # base_prices = [entry['Close'] for entry in list(dates_window)[:-1] if 'Close' in entry]
                         # correlations = calculate_correlation({k: list(v) for k, v in stocks_window.items() if k != stock_symbol}, base_prices)
 
                         # Find the most correlated stocks and their data
@@ -77,7 +77,7 @@ def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1
                             # Prepare Y value
                             # Y = 1 if dates_window[-1]['Close'] > 0 else 0
 
-                            Y = dates_window[-1]['SMA_40']
+                            Y = dates_window[-1]['EMA_23']
 
                             
                             # Y is determined if the percentage change is + or -. + means stock went up. 
@@ -117,4 +117,4 @@ def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1
 
 # Example usage
 input_file = 'G:/StockData/normalized_master_datasets/abs_normalized.json'
-create_training_examples(input_file, split_percentage=85, n=30)
+create_training_examples(input_file, split_percentage=85, n=20)

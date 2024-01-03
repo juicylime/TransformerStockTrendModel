@@ -28,9 +28,9 @@ def fetch_stock_data(ticker, start_date, end_date):
     data.ta.sma(length=10, column='Volume', append=True)
     data.rename(columns={'SMA_10': 'avgTradingVolume'}, inplace=True)
     data.ta.sma(length=30, append=True)
-    data.ta.sma(length=40, append=True)
-    data.ta.ema(length=10, append=True)  # Short-term EMA
-    data.ta.ema(length=30, append=True)
+    # data.ta.sma(length=33, append=True)
+    data.ta.ema(length=20, append=True)  # Short-term EMA
+    data.ta.ema(length=23, append=True)
     data.ta.macd(append=True)  # MACD
     data.ta.rsi(length=10, append=True)  # RSI
     data.ta.bbands(append=True)  # Bollinger Bands

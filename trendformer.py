@@ -13,9 +13,9 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.losses import Huber
 
 
-full_feature_list = sorted(['week_day', 'Open', 'High', 'Low', 'Close', 'Volume', 'SMA_30', 'SMA_40', 'EMA_10', 'EMA_30', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'RSI_10', 'BBL_5_2.0', 'BBM_5_2.0', 'BBU_5_2.0', 'BBB_5_2.0', 'BBP_5_2.0', 'avgTradingVolume', 'ADX_14', 'DMP_14', 'DMN_14', 'ISA_9', 'ISB_26', 'ITS_9', 'IKS_26', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'PSAR_combined', '52_week_high', '52_week_low', 'NASDAQ_Close', 'NASDAQ_EMA_10', 'NASDAQ_EMA_30', 'SP500_Close', 'SP500_EMA_10', 'SP500_EMA_30'])
+full_feature_list = sorted(['week_day', 'Open', 'High', 'Low', 'Close', 'Volume', 'SMA_30', 'EMA_20', 'EMA_23', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'RSI_10', 'BBL_5_2.0', 'BBM_5_2.0', 'BBU_5_2.0', 'BBB_5_2.0', 'BBP_5_2.0', 'avgTradingVolume', 'ADX_14', 'DMP_14', 'DMN_14', 'ISA_9', 'ISB_26', 'ITS_9', 'IKS_26', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'PSAR_combined', '52_week_high', '52_week_low', 'NASDAQ_Close', 'NASDAQ_EMA_10', 'NASDAQ_EMA_30', 'SP500_Close', 'SP500_EMA_10', 'SP500_EMA_30'])
 
-features_to_keep = ['week_day', 'Open', 'High', 'Low', 'Close', 'Volume','SMA_30', 'SMA_40', 'EMA_10', 'EMA_30', 'MACDh_12_26_9', 'RSI_10', 'BBP_5_2.0', 'avgTradingVolume', 'STOCHk_14_3_3', '52_week_high', '52_week_low', 'NASDAQ_Close', 'STOCHd_14_3_3', 'ADX_14', 'DMP_14', 'DMN_14', 'ISA_9', 'ISB_26', 'ITS_9', 'IKS_26', 'PSAR_combined']
+features_to_keep = ['week_day', 'Open', 'High', 'Low', 'Close', 'Volume','SMA_30', 'EMA_20', 'EMA_23', 'MACDh_12_26_9', 'RSI_10', 'BBP_5_2.0', 'avgTradingVolume', 'STOCHk_14_3_3', '52_week_high', '52_week_low', 'NASDAQ_Close', 'STOCHd_14_3_3', 'ADX_14', 'DMP_14', 'DMN_14', 'ISA_9', 'ISB_26', 'ITS_9', 'IKS_26', 'PSAR_combined']
 
 feature_list = sorted([feature for feature in full_feature_list if feature in features_to_keep])
 
@@ -29,10 +29,10 @@ num_layers = 6  # Number of encoder and decoder layers
 dropout_rate = 0.1  # Dropout rate
 
 # Constant learning rate
-constant_learning_rate = 1e-6
+constant_learning_rate = 1e-5
 
 # [32, 20, x]
-seq_length = 30  # Length of your input sequences
+seq_length = 20  # Length of your input sequences
 feature_size = len(feature_list)  # Number of features in your dataset
 
 
@@ -118,7 +118,7 @@ def transformer_model(seq_length, feature_size, d_model, num_heads, dff, num_lay
     # encoder_model.trainable = False
 
     # Extracting the open prices and applying positional encoding
-    open_prices = inputs[:, :, 21:22]  # Assuming 0-based indexing, the 11th feature is at index 10
+    open_prices = inputs[:, :, 7:8]  # Assuming 0-based indexing, the 11th feature is at index 10
     open_prices_pos_encoding = positional_encoding(seq_length, d_model)
     open_prices += open_prices_pos_encoding
 
