@@ -1,258 +1,302 @@
 {
     "TSLA": {
         "Symbol": "TSLA",
-        "Name": "Tesla, Inc.",
-        "EntityNames": [
-            "TSLA",
-            "Tesla",
-            "Tesla, Inc."
-        ]
+        "Name": "Tesla, Inc."
     },
-    "GOOG": {
-        "Symbol": "GOOG",
-        "Name": "Alphabet Inc.",
-        "EntityNames": [
-            "GOOG",
-            "GOOGL",
-            "Alphabet Inc",
-            "Alphabet"
-        ]
+    "MARA": {
+        "Symbol": "MARA",
+        "Name": "Marathon Digital Holdings, Inc."
     },
-    "PLTR": {
-        "Symbol": "PLTR",
-        "Name": "Palantir Inc.",
-        "EntityNames": [
-            "PLTR",
-            "Palantir",
-            "Palantir Inc."
-        ]
+    "LTHM": {
+        "Symbol": "LTHM",
+        "Name": "Arcadium Lithium plc"
     },
-    "AAPL": {
-        "Symbol": "AAPL",
-        "Name": "Apple Inc.",
-        "EntityNames": [
-            "AAPL",
-            "Apple",
-            "Apple Inc."
-        ]
+    "JNPR": {
+        "Symbol": "JNPR",
+        "Name": "Juniper Networks, Inc."
     },
     "AMD": {
         "Symbol": "AMD",
-        "Name": "Advanced Micro Devices, Inc.",
-        "EntityNames": [
-            "AMD",
-            "Advanced Micro Devices",
-            "Advanced Micro Devices, Inc."
-        ]
+        "Name": "Advanced Micro Devices, Inc."
     },
     "NVDA": {
         "Symbol": "NVDA",
-        "Name": "NVIDIA Corporation",
-        "EntityNames": [
-            "NVDA",
-            "NVIDIA",
-            "NVIDIA Corporation"
-        ]
+        "Name": "NVIDIA Corporation"
     },
-    "AAL": {
-        "Symbol": "AAL",
-        "Name": "American Airlines Group Inc.",
-        "EntityNames": [
-            "AAL",
-            "American Airlines",
-            "American Airlines Group Inc."
-        ]
+    "NIO": {
+        "Symbol": "NIO",
+        "Name": "NIO Inc."
     },
-    "BAC": {
-        "Symbol": "BAC",
-        "Name": "Bank of America Corporation",
-        "EntityNames": [
-            "BAC",
-            "Bank of America",
-            "Bank of America Corporation"
-        ]
+    "PLTR": {
+        "Symbol": "PLTR",
+        "Name": "Palantir Technologies Inc."
+    },
+    "SOFI": {
+        "Symbol": "SOFI",
+        "Name": "SoFi Technologies, Inc."
+    },
+    "PLUG": {
+        "Symbol": "PLUG",
+        "Name": "Plug Power Inc."
     },
     "AMZN": {
         "Symbol": "AMZN",
-        "Name": "Amazon.com Inc.",
-        "EntityNames": [
-            "AMZN",
-            "Amazon",
-            "Amazon.com Inc.",
-            "Amazon.com"
-        ]
+        "Name": "Amazon.com, Inc."
     },
-    "BBD": {
-        "Symbol": "BBD",
-        "Name": "Banco Bradesco S.A.",
-        "EntityNames": [
-            "BBD",
-            "Banco Bradesco",
-            "Banco Bradesco S.A."
-        ]
+    "NU": {
+        "Symbol": "NU",
+        "Name": "Nu Holdings Ltd."
     },
-    "UBER": {
-        "Symbol": "UBER",
-        "Name": "Uber, Inc.",
-        "EntityNames": [
-            "UBER",
-            "Uber",
-            "Uber, Inc."
-        ]
-    },
-    "BCS": {
-        "Symbol": "BCS",
-        "Name": "Barclays PLC",
-        "EntityNames": [
-            "BCS",
-            "Barclays",
-            "Barclays PLC"
-        ]
+    "DNA": {
+        "Symbol": "DNA",
+        "Name": "Ginkgo Bioworks Holdings, Inc."
     },
     "LCID": {
         "Symbol": "LCID",
-        "Name": "Lucid, Inc.",
-        "EntityNames": [
-            "LCID",
-            "Lucid",
-            "Lucid, Inc."
-        ]
+        "Name": "Lucid Group, Inc."
     },
-    "INTC": {
-        "Symbol": "INTC",
-        "Name": "Intel Corporation",
-        "EntityNames": [
-            "INTC",
-            "Intel",
-            "Intel Corporation"
-        ]
-    },
-    "META": {
-        "Symbol": "META",
-        "Name": "Meta, Inc.",
-        "EntityNames": [
-            "META",
-            "Facebook",
-            "Meta, Inc.",
-            "Meta Platforms Inc"
-        ]
-    },
-    "VALE": {
-        "Symbol": "VALE",
-        "Name": "Vale S.A.",
-        "EntityNames": [
-            "VALE",
-            "Vale S.A.",
-            "Vale",
-            "Vale sa"
-        ]
-    },
-    "VZ": {
-        "Symbol": "VZ",
-        "Name": "Verizon Inc.",
-        "EntityNames": [
-            "VZ",
-            "Verizon",
-            "Verizon Inc."
-        ]
-    },
-    "SRC": {
-        "Symbol": "SRC",
-        "Name": "Spirit Realty Capital, Inc.",
-        "EntityNames": [
-            "SRC",
-            "Spirit Realty Capital",
-            "Spirit Realty Capital, Inc."
-        ]
-    },
-    "CCL": {
-        "Symbol": "CCL",
-        "Name": "Carnival Corporation & plc",
-        "EntityNames": [
-            "CCL",
-            "Carnival",
-            "Carnival Corporation & plc"
-        ]
-    },
-    "BMY": {
-        "Symbol": "BMY",
-        "Name": "Bristol-Myers Squibb Company",
-        "EntityNames": [
-            "BMY",
-            "Bristol-Myers Squibb",
-            "Bristol-Myers Squibb Company"
-        ]
+    "AAPL": {
+        "Symbol": "AAPL",
+        "Name": "Apple Inc."
     },
     "PFE": {
         "Symbol": "PFE",
-        "Name": "Pfizer Inc.",
-        "EntityNames": [
-            "PFE",
-            "Pfizer",
-            "Pfizer Inc."
-        ]
+        "Name": "Pfizer Inc."
     },
-    "ITUB": {
-        "Symbol": "ITUB",
-        "Name": "Itau Unibanco Holding S.A.",
-        "EntityNames": [
-            "ITUB",
-            "Itau Unibanco",
-            "Itua Unibanco Holding S.A."
-        ]
+    "F": {
+        "Symbol": "F",
+        "Name": "Ford Motor Company"
+    },
+    "TGTX": {
+        "Symbol": "TGTX",
+        "Name": "TG Therapeutics, Inc."
+    },
+    "INTC": {
+        "Symbol": "INTC",
+        "Name": "Intel Corporation"
+    },
+    "MPW": {
+        "Symbol": "MPW",
+        "Name": "Medical Properties Trust, Inc."
+    },
+    "RIOT": {
+        "Symbol": "RIOT",
+        "Name": "Riot Platforms, Inc."
+    },
+    "AAL": {
+        "Symbol": "AAL",
+        "Name": "American Airlines Group Inc."
+    },
+    "CCL": {
+        "Symbol": "CCL",
+        "Name": "Carnival Corporation & plc"
+    },
+    "BAC": {
+        "Symbol": "BAC",
+        "Name": "Bank of America Corporation"
+    },
+    "SATS": {
+        "Symbol": "SATS",
+        "Name": "EchoStar Corporation"
+    },
+    "U": {
+        "Symbol": "U",
+        "Name": "Unity Software Inc."
+    },
+    "META": {
+        "Symbol": "META",
+        "Name": "Meta Platforms, Inc."
     },
     "MSFT": {
         "Symbol": "MSFT",
-        "Name": "Microsoft Corp",
-        "EntityNames": [
-            "MSFT",
-            "Microsoft",
-            "Microsoft Corp"
-        ]
+        "Name": "Microsoft Corporation"
     },
-    "XOM": {
-        "Symbol": "XOM",
-        "Name": "Exxon Mobil Corporation",
-        "EntityNames": [
-            "XOM",
-            "Exxon Mobil",
-            "Exxon Mobil Corporation"
-        ]
+    "BCS": {
+        "Symbol": "BCS",
+        "Name": "Barclays PLC"
     },
-    "WDC": {
-        "Symbol": "WDC",
-        "Name": "Western Digital Corporation",
-        "EntityNames": [
-            "WDC",
-            "Western Digital",
-            "Western Digital Corporation"
-        ]
+    "BABA": {
+        "Symbol": "BABA",
+        "Name": "Alibaba Group Holding Limited"
     },
-    "AGNC": {
-        "Symbol": "AGNC",
-        "Name": "AGNC Investment Corp.",
-        "EntityNames": [
-            "AGNC",
-            "AGNC Investment",
-            "AGNC Investment Corp."
-        ]
+    "HPE": {
+        "Symbol": "HPE",
+        "Name": "Hewlett Packard Enterprise Company"
     },
-    "NOK": {
-        "Symbol": "NOK",
-        "Name": "Nokia Oyj",
-        "EntityNames": [
-            "NOK",
-            "Nokia",
-            "Nokia Oyj"
-        ]
+    "T": {
+        "Symbol": "T",
+        "Name": "AT&T Inc."
+    },
+    "CHWY": {
+        "Symbol": "CHWY",
+        "Name": "Chewy, Inc."
+    },
+    "BBD": {
+        "Symbol": "BBD",
+        "Name": "Banco Bradesco S.A."
+    },
+    "COIN": {
+        "Symbol": "COIN",
+        "Name": "Coinbase Global, Inc."
+    },
+    "UBER": {
+        "Symbol": "UBER",
+        "Name": "Uber Technologies, Inc."
+    },
+    "PTON": {
+        "Symbol": "PTON",
+        "Name": "Peloton Interactive, Inc."
+    },
+    "SNAP": {
+        "Symbol": "SNAP",
+        "Name": "Snap Inc."
+    },
+    "QS": {
+        "Symbol": "QS",
+        "Name": "QuantumScape Corporation"
+    },
+    "TOST": {
+        "Symbol": "TOST",
+        "Name": "Toast, Inc."
+    },
+    "RIVN": {
+        "Symbol": "RIVN",
+        "Name": "Rivian Automotive, Inc."
+    },
+    "UPST": {
+        "Symbol": "UPST",
+        "Name": "Upstart Holdings, Inc."
+    },
+    "GRFS": {
+        "Symbol": "GRFS",
+        "Name": "Grifols, S.A."
+    },
+    "GOOGL": {
+        "Symbol": "GOOGL",
+        "Name": "Alphabet Inc."
+    },
+    "VALE": {
+        "Symbol": "VALE",
+        "Name": "Vale S.A."
+    },
+    "ABEV": {
+        "Symbol": "ABEV",
+        "Name": "Ambev S.A."
+    },
+    "RIG": {
+        "Symbol": "RIG",
+        "Name": "Transocean Ltd."
+    },
+    "AFRM": {
+        "Symbol": "AFRM",
+        "Name": "Affirm Holdings, Inc."
+    },
+    "WBA": {
+        "Symbol": "WBA",
+        "Name": "Walgreens Boots Alliance, Inc."
+    },
+    "BA": {
+        "Symbol": "BA",
+        "Name": "The Boeing Company"
+    },
+    "PACB": {
+        "Symbol": "PACB",
+        "Name": "Pacific Biosciences of California, Inc."
+    },
+    "SWN": {
+        "Symbol": "SWN",
+        "Name": "Southwestern Energy Company"
+    },
+    "ARDX": {
+        "Symbol": "ARDX",
+        "Name": "Ardelyx, Inc."
+    },
+    "OPEN": {
+        "Symbol": "OPEN",
+        "Name": "Opendoor Technologies Inc."
+    },
+    "INFY": {
+        "Symbol": "INFY",
+        "Name": "Infosys Limited"
     },
     "PBR": {
         "Symbol": "PBR",
-        "Name": "Petrobras",
-        "EntityNames": [
-            "PBR",
-            "Petrobras",
-            "Petrobras"
-        ]
+        "Name": "Petr\u00f3leo Brasileiro S.A. - Petrobras"
+    },
+    "XOM": {
+        "Symbol": "XOM",
+        "Name": "Exxon Mobil Corporation"
+    },
+    "VZ": {
+        "Symbol": "VZ",
+        "Name": "Verizon Communications Inc."
+    },
+    "KEY": {
+        "Symbol": "KEY",
+        "Name": "KeyCorp"
+    },
+    "ON": {
+        "Symbol": "ON",
+        "Name": "ON Semiconductor Corporation"
+    },
+    "GOOG": {
+        "Symbol": "GOOG",
+        "Name": "Alphabet Inc."
+    },
+    "ERIC": {
+        "Symbol": "ERIC",
+        "Name": "Telefonaktiebolaget LM Ericsson (publ)"
+    },
+    "XPEV": {
+        "Symbol": "XPEV",
+        "Name": "XPeng Inc."
+    },
+    "PARA": {
+        "Symbol": "PARA",
+        "Name": "Paramount Global"
+    },
+    "C": {
+        "Symbol": "C",
+        "Name": "Citigroup Inc."
+    },
+    "NOK": {
+        "Symbol": "NOK",
+        "Name": "Nokia Oyj"
+    },
+    "GOLD": {
+        "Symbol": "GOLD",
+        "Name": "Barrick Gold Corporation"
+    },
+    "BP": {
+        "Symbol": "BP",
+        "Name": "BP p.l.c."
+    },
+    "WBD": {
+        "Symbol": "WBD",
+        "Name": "Warner Bros. Discovery, Inc."
+    },
+    "BMY": {
+        "Symbol": "BMY",
+        "Name": "Bristol-Myers Squibb Company"
+    },
+    "TME": {
+        "Symbol": "TME",
+        "Name": "Tencent Music Entertainment Group"
+    },
+    "CNHI": {
+        "Symbol": "CNHI",
+        "Name": "CNH Industrial N.V."
+    },
+    "OXY": {
+        "Symbol": "OXY",
+        "Name": "Occidental Petroleum Corporation"
+    },
+    "MBLY": {
+        "Symbol": "MBLY",
+        "Name": "Mobileye Global Inc."
+    },
+    "RUN": {
+        "Symbol": "RUN",
+        "Name": "Sunrun Inc."
     }
 }

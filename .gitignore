@@ -8,3 +8,4 @@
 /__pycache__
 /historical_intraday_market_data
 /model_weights
+/trading_bot

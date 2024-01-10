@@ -32,7 +32,7 @@ def standardize_columns(df, column_names, load_stats=None):
 
 
 def standardize_stock_data(data, stats=None):
-    columns_to_standardize_together = ['Open', 'High', 'Low', 'Close', 'SMA_30', 'EMA_20', 'EMA_23', 'BBL_5_2.0', 'BBM_5_2.0',
+    columns_to_standardize_together = ['Open', 'High', 'Low', 'Close', 'SMA_30', 'EMA_10', 'BBL_5_2.0', 'BBM_5_2.0',
                                        'BBU_5_2.0', 'ISA_9', 'ISB_26', 'ITS_9', 'IKS_26', 'PSAR_combined', '52_week_high', '52_week_low']
 
 

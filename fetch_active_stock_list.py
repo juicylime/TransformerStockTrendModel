@@ -4,7 +4,7 @@ import json
 import time
 
 def fetch_most_traded_nasdaq_stocks():
-    url = "https://finance.yahoo.com/screener/predefined/most_actives?offset=0&count=50"
+    url = "https://finance.yahoo.com/screener/predefined/most_actives?offset=0&count=75"
     
     # Start the web driver (you'll need to specify the correct path to the driver for your browser)
     driver = webdriver.Chrome()

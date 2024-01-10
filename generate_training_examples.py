@@ -22,7 +22,7 @@ def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1
     }
 
     for stock_symbol, dates in data.items():
-        dates_window = deque(maxlen=n + 10)
+        dates_window = deque(maxlen=n + 3)
         stocks_window = {stock: deque(maxlen=n) for stock in stocks_data}
         sorted_dates = sorted(dates.keys())
         
@@ -51,7 +51,7 @@ def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1
                         else:
                             prices_deque.append(None)
 
-                if len(dates_window) == n + 10: # number of days in future to predict
+                if len(dates_window) == n + 3: # number of days in future to predict
                     # Ensure we have all the necessary prices to calculate correlations
                     if all(len(prices_deque) == n for prices_deque in stocks_window.values()):
                         # Prepare data for correlation calculation
@@ -71,13 +71,13 @@ def create_training_examples(input_file, split_percentage=85, n=30, chunk_size=1
                                 # 'correlation_with_max_negative': correlations[max_negative_stock],
                                 # 'max_negative_stock_close': stocks_data[max_negative_stock][idx]
                                 }
-                                for idx, entry in enumerate(list(dates_window)[:-10])
+                                for idx, entry in enumerate(list(dates_window)[:-3])
                             ]
                             
                             # Prepare Y value
                             # Y = 1 if dates_window[-1]['Close'] > 0 else 0
 
-                            Y = dates_window[-1]['EMA_23']
+                            Y = dates_window[-1]['EMA_10']
 
                             
                             # Y is determined if the percentage change is + or -. + means stock went up. 

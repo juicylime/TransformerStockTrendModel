@@ -29,13 +29,22 @@ def fetch_stock_data(ticker, start_date, end_date):
     data.rename(columns={'SMA_10': 'avgTradingVolume'}, inplace=True)
     data.ta.sma(length=30, append=True)
     # data.ta.sma(length=33, append=True)
-    data.ta.ema(length=20, append=True)  # Short-term EMA
-    data.ta.ema(length=23, append=True)
+    data.ta.ema(length=10, append=True)  # Short-term EMA
     data.ta.macd(append=True)  # MACD
     data.ta.rsi(length=10, append=True)  # RSI
     data.ta.bbands(append=True)  # Bollinger Bands
     data.ta.adx(length=14, append=True)
     data.ta.ichimoku(append=True)
+    data.ta.atr(length=14, append=True)
+
+    # Calculate the difference between the current and previous day's EMA_20 values
+    data['EMA_10_diff'] = data['EMA_10'].diff()
+
+    # Create a new column 'EMA_20_trend' that is 0 if the EMA_20 went down and 1 if it went up
+    data['EMA_10_trend'] = data['EMA_10_diff'].apply(lambda x: 1 if x > 0 else 0)
+
+    # Drop the 'EMA_20_diff' column as it's no longer needed
+    data.drop(columns=['EMA_10_diff'], inplace=True)
 
     # Adding Stochastic Oscillator
     data.ta.stoch(high='High', low='Low', close='Close', k=14, d=3, append=True)
@@ -87,7 +96,7 @@ def fetch_market_indices(start_date, end_date):
     return nasdaq_data, sp500_data
 
 
-def get_stock_data(start_date, end_date, stock_list):
+def get_stock_data(start_date, end_date, stock_list, as_json=True):
     # Extract the stock tickers from the dictionary
     stocks = list(stock_list.keys())
     
@@ -119,9 +128,13 @@ def get_stock_data(start_date, end_date, stock_list):
 
         # Convert Timestamp objects to strings
         stock_data_trimmed.index = stock_data_trimmed.index.strftime('%Y-%m-%d')
-
-        all_data[stock] = stock_data_trimmed.to_dict(orient='index')
-    
+        
+        if as_json:
+            all_data[stock] = stock_data_trimmed.to_dict(orient='index')
+        else:
+            all_data[stock] = stock_data_trimmed
+        
+            
     return all_data
    
 

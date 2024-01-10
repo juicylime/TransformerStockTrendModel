@@ -1,21 +1,20 @@
+
 import tensorflow as tf
 import numpy as np
-import matplotlib.pyplot as plt
-
 
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import MultiHeadAttention, LayerNormalization, Dropout,Dense, Input, Masking, GlobalAveragePooling1D, Embedding, Lambda, LSTM, RepeatVector, TimeDistributed
-from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.layers import MultiHeadAttention, LayerNormalization, Dropout,Dense, Input, Masking, GlobalAveragePooling1D, Embedding, Lambda, LSTM, RepeatVector, TimeDistributed, Flatten
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras.optimizers.schedules import ExponentialDecay
 from tensorflow.keras.regularizers import l2
 from tensorflow.keras.layers import LeakyReLU
 from tensorflow.keras import backend as K
-from tensorflow.keras.losses import Huber
+from tensorflow.keras.losses import BinaryCrossentropy
 
 
-full_feature_list = sorted(['week_day', 'Open', 'High', 'Low', 'Close', 'Volume', 'SMA_30', 'EMA_20', 'EMA_23', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'RSI_10', 'BBL_5_2.0', 'BBM_5_2.0', 'BBU_5_2.0', 'BBB_5_2.0', 'BBP_5_2.0', 'avgTradingVolume', 'ADX_14', 'DMP_14', 'DMN_14', 'ISA_9', 'ISB_26', 'ITS_9', 'IKS_26', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'PSAR_combined', '52_week_high', '52_week_low', 'NASDAQ_Close', 'NASDAQ_EMA_10', 'NASDAQ_EMA_30', 'SP500_Close', 'SP500_EMA_10', 'SP500_EMA_30'])
+full_feature_list = sorted(['ATRr_14', 'week_day', 'Open', 'High', 'Low', 'Close', 'Volume', 'SMA_30', 'EMA_10', 'EMA_10_trend', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'RSI_10', 'BBL_5_2.0', 'BBM_5_2.0', 'BBU_5_2.0', 'BBB_5_2.0', 'BBP_5_2.0', 'avgTradingVolume', 'ADX_14', 'DMP_14', 'DMN_14', 'ISA_9', 'ISB_26', 'ITS_9', 'IKS_26', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'PSAR_combined', '52_week_high', '52_week_low', 'NASDAQ_Close', 'NASDAQ_EMA_10', 'NASDAQ_EMA_30', 'SP500_Close', 'SP500_EMA_10', 'SP500_EMA_30'])
 
-features_to_keep = ['week_day', 'Open', 'High', 'Low', 'Close', 'Volume','SMA_30', 'EMA_20', 'EMA_23', 'MACDh_12_26_9', 'RSI_10', 'BBP_5_2.0', 'avgTradingVolume', 'STOCHk_14_3_3', '52_week_high', '52_week_low', 'NASDAQ_Close', 'STOCHd_14_3_3', 'ADX_14', 'DMP_14', 'DMN_14', 'ISA_9', 'ISB_26', 'ITS_9', 'IKS_26', 'PSAR_combined']
+features_to_keep = ['ATRr_14', 'week_day', 'Open', 'High', 'Low', 'Close', 'Volume','SMA_30', 'EMA_10', 'EMA_10_trend', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'RSI_10', 'BBP_5_2.0', 'avgTradingVolume', 'STOCHk_14_3_3', '52_week_high', '52_week_low', 'NASDAQ_Close', 'STOCHd_14_3_3', 'ADX_14', 'DMP_14', 'DMN_14', 'ISA_9', 'ISB_26', 'ITS_9', 'IKS_26', 'PSAR_combined']
 
 feature_list = sorted([feature for feature in full_feature_list if feature in features_to_keep])
 
@@ -23,18 +22,17 @@ feature_list = sorted([feature for feature in full_feature_list if feature in fe
 # Define the Transformer's parameters
 d_model = 512  # Embedding dimension
 
-num_heads = 8  # Number of attention heads
+num_heads = 16  # Number of attention heads
 dff = 512  # Dimension of the feed-forward network
-num_layers = 6  # Number of encoder and decoder layers
+num_layers = 12  # Number of encoder and decoder layers
 dropout_rate = 0.1  # Dropout rate
 
 # Constant learning rate
-constant_learning_rate = 1e-5
+constant_learning_rate = 1e-6
 
 # [32, 20, x]
 seq_length = 20  # Length of your input sequences
 feature_size = len(feature_list)  # Number of features in your dataset
-
 
 
 def custom_loss(y_true, y_pred):
@@ -118,9 +116,9 @@ def transformer_model(seq_length, feature_size, d_model, num_heads, dff, num_lay
     # encoder_model.trainable = False
 
     # Extracting the open prices and applying positional encoding
-    open_prices = inputs[:, :, 7:8]  # Assuming 0-based indexing, the 11th feature is at index 10
-    open_prices_pos_encoding = positional_encoding(seq_length, d_model)
-    open_prices += open_prices_pos_encoding
+    # open_prices = inputs[:, :, 7:8]  # Assuming 0-based indexing, the 11th feature is at index 10
+    # open_prices_pos_encoding = positional_encoding(seq_length, d_model)
+    # open_prices += open_prices_pos_encoding
 
     # feature_embeddings = encoder_model(inputs)
     feature_embeddings = Dense(d_model, activation='leaky_relu')(inputs)
@@ -135,18 +133,21 @@ def transformer_model(seq_length, feature_size, d_model, num_heads, dff, num_lay
     encoder_output = x
 
     # Preparing the decoder inputs by expanding the dimensions of the open prices to match the encoder output
-    decoder_output = open_prices
+    # decoder_output = open_prices
     # Passing the combined inputs through the decoder layers
-    for i in range(num_layers):
-        decoder_output = transformer_decoder_layer(d_model, num_heads, dff, dropout_rate, f"decoder_layer_{i+1}")([decoder_output, encoder_output])
+    # for i in range(num_layers):
+    #   decoder_output = transformer_decoder_layer(d_model, num_heads, dff, dropout_rate, f"decoder_layer_{i+1}")([decoder_output, encoder_output])
 
-    decoder_output = Lambda(lambda x: x[:, -1, :])(decoder_output)
+    # decoder_output = Lambda(lambda x: x[:, -1, :])(decoder_output)
 
-    outputs = Dense(1, activation='linear')(decoder_output)
+    # Flatten the encoder's output and pass it through a Dense layer to predict the target value
+    encoder_output = Flatten()(encoder_output)
+
+    outputs = Dense(1, activation='sigmoid')(encoder_output)
 
     model = Model(inputs=inputs, outputs=outputs)
-    # model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=constant_learning_rate),
-    #             loss=custom_loss,
-    #             metrics=[directional_accuracy])
+    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=constant_learning_rate),
+                loss=BinaryCrossentropy(),
+                metrics=['accuracy'])
     # metrics=[directional_accuracy, tf.keras.metrics.MeanSquaredError(name="MSE"), tf.keras.metrics.MeanAbsoluteError(name="MAE"), tf.keras.metrics.MeanAbsolutePercentageError(name="MAPE")])
     return model

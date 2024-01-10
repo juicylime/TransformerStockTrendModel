@@ -53,7 +53,7 @@ def count_records_in_tfrecord(tfrecord_file):
     return count
 
 def main():
-    split = 'training'
+    split = 'validation'
     input_directory = f'G:/StockData/{split}_sequence_20_split_85'
     convert_examples_to_tf_records(input_directory, split)
 
